@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Web Developer</title>
+    <meta name="description" content="Junior Web Developer - Il mio percorso formativo e i miei progetti">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- p5.js per effetto grafico -->
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.min.js"></script>
+</head>
+<body>
+    <!-- Sketch Background (p5.js) -->
+    <div id="sketch"></div>
+
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="loader__text">
+            <span>C</span><span>a</span><span>r</span><span>i</span><span>c</span><span>a</span><span>…</span>
+        </div>
+    </div>
+
+    <!-- Frame -->
+    <div class="frame">
+        <div class="frame__line frame__line--top"></div>
+        <div class="frame__line frame__line--bottom"></div>
+        <div class="frame__line frame__line--left"></div>
+        <div class="frame__line frame__line--right"></div>
+    </div>
+
+    <!-- Theme Switcher -->
+    <div class="theme-switcher">
+        <button class="theme-btn active" data-theme="light" onclick="setTheme('light')">
+            <svg class="theme-btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="5"/>
+                <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+            </svg>
+            Light
+        </button>
+        <button class="theme-btn" data-theme="dark" onclick="setTheme('dark')">
+            <svg class="theme-btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+            Dark
+        </button>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <ul class="nav__list">
+            <li class="nav__item active" data-section="hero">
+                <span class="nav__dot"></span>
+                <span class="nav__text">Home</span>
+            </li>
+            <li class="nav__item" data-section="about">
+                <span class="nav__dot"></span>
+                <span class="nav__text">About</span>
+            </li>
+            <li class="nav__item" data-section="projects">
+                <span class="nav__dot"></span>
+                <span class="nav__text">Progetti</span>
+            </li>
+            <li class="nav__item" data-section="path">
+                <span class="nav__dot"></span>
+                <span class="nav__text">Percorso</span>
+            </li>
+            <li class="nav__item" data-section="passions">
+                <span class="nav__dot"></span>
+                <span class="nav__text">Passioni</span>
+            </li>
+            <li class="nav__item" data-section="contact">
+                <span class="nav__dot"></span>
+                <span class="nav__text">Contatti</span>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Hero Section -->
+        <section class="hero section visible" id="hero">
+            <div class="hero__greeting">
+                <span>Ciao, sono</span>
+            </div>
+            <h1 class="hero__name">
+                <span>Andrea</span>
+                <span>Pavan</span>
+            </h1>
+            <p class="hero__title">Junior Web Developer · Autodidatta · In continua crescita</p>
+            <div class="hero__scroll">
+                <div class="hero__scroll-line"></div>
+                <span>Scorri per esplorare</span>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="section" id="about">
+            <span class="section__label">01 / About Me</span>
+            <h2 class="section__title">Chi sono</h2>
+            <p class="about__text">
+                <span>Web developer in formazione</span> con la passione per il codice pulito e le interfacce intuitive.
+                Ho iniziato il mio percorso con il corso di Web Design di <span>Veneto Formazione</span> e ora sto frequentando il Corso Biennale
+                Web Developer Full Stack all'ITS Digital Academy Mario Volpato per Tecnico Superiore Sviluppatore Software.
+                Credo che la condivisione sia la chiave dell'apprendimento: per questo ho creato questo spazio
+                dove <span>mostro il mio percorso</span> e condivido materiale utile per aspiranti developer.
+                <br><br>
+                Quando non codifico, mi trovi sui <span>sentieri di montagna</span>, 
+                immerso nella <span>musica</span> o con un buon libro tra le mani.
+            </p>
+            <div class="about__stats">
+                <div class="stat">
+                    <div class="stat__number">15+</div>
+                    <div class="stat__label">Esercizi completati</div>
+                </div>
+                <div class="stat">
+                    <div class="stat__number">3</div>
+                    <div class="stat__label">Progetti live</div>
+                </div>
+                <div class="stat">
+                    <div class="stat__number">∞</div>
+                    <div class="stat__label">Voglia di imparare</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section class="section" id="projects">
+            <span class="section__label">02 / Progetti</span>
+            <h2 class="section__title">I miei lavori</h2>
+            
+            <div class="projects__filters">
+                <button class="filter-btn active" data-filter="all">Tutti</button>
+                <button class="filter-btn" data-filter="siti">Siti Web</button>
+                <button class="filter-btn" data-filter="webapp">Web App</button>
+                <button class="filter-btn" data-filter="figma">Bozze Figma</button>
+            </div>
+
+            <div class="projects__grid">
+                <article class="project-card" data-category="siti">
+                    <div class="project-card__preview project-card__preview--placeholder">
+                        <!-- <img src="img/progetto-1.jpg" alt="Nome Progetto 1"> -->
+                    </div>
+                    <span class="project-card__number">01</span>
+                    <h3 class="project-card__title">Nome Progetto 1</h3>
+                    <p class="project-card__desc">Breve descrizione del progetto. Cosa fa, per chi è stato creato, quali problemi risolve.</p>
+                    <div class="project-card__tags">
+                        <span class="tag">HTML</span>
+                        <span class="tag">CSS</span>
+                        <span class="tag">JavaScript</span>
+                    </div>
+                    <div class="project-card__links">
+                        <a href="#" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                                <polyline points="15 3 21 3 21 9"/>
+                                <line x1="10" y1="14" x2="21" y2="3"/>
+                            </svg>
+                            Live
+                        </a>
+                        <a href="#" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                            </svg>
+                            Code
+                        </a>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="webapp">
+                    <div class="project-card__preview project-card__preview--placeholder">
+                        <!-- <img src="img/progetto-2.jpg" alt="Web App Demo"> -->
+                    </div>
+                    <span class="project-card__number">02</span>
+                    <h3 class="project-card__title">Web App Demo</h3>
+                    <p class="project-card__desc">Una web application interattiva creata durante il percorso formativo.</p>
+                    <div class="project-card__tags">
+                        <span class="tag">React</span>
+                        <span class="tag">Node.js</span>
+                        <span class="tag">MongoDB</span>
+                    </div>
+                    <div class="project-card__links">
+                        <a href="#" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                                <polyline points="15 3 21 3 21 9"/>
+                                <line x1="10" y1="14" x2="21" y2="3"/>
+                            </svg>
+                            Live
+                        </a>
+                        <a href="#" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                            </svg>
+                            Code
+                        </a>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="figma">
+                    <div class="project-card__preview project-card__preview--placeholder">
+                        <!-- <img src="img/progetto-3.jpg" alt="UI Design Concept"> -->
+                    </div>
+                    <span class="project-card__number">03</span>
+                    <h3 class="project-card__title">UI Design Concept</h3>
+                    <p class="project-card__desc">Bozza Figma per un'applicazione mobile. Focus su UX e design system.</p>
+                    <div class="project-card__tags">
+                        <span class="tag">Figma</span>
+                        <span class="tag">UI/UX</span>
+                        <span class="tag">Prototype</span>
+                    </div>
+                    <div class="project-card__links">
+                        <a href="#" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H12v7H8.5A3.5 3.5 0 0 1 5 5.5z"/>
+                                <path d="M12 2h3.5a3.5 3.5 0 1 1 0 7H12V2z"/>
+                                <path d="M12 12.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 1 1-7 0z"/>
+                                <path d="M5 19.5A3.5 3.5 0 0 1 8.5 16H12v3.5a3.5 3.5 0 1 1-7 0z"/>
+                                <path d="M5 12.5A3.5 3.5 0 0 1 8.5 9H12v7H8.5A3.5 3.5 0 0 1 5 12.5z"/>
+                            </svg>
+                            Figma
+                        </a>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="siti">
+                    <div class="project-card__preview project-card__preview--placeholder">
+                        <!-- <img src="img/progetto-4.jpg" alt="Landing Page"> -->
+                    </div>
+                    <span class="project-card__number">04</span>
+                    <h3 class="project-card__title">Landing Page</h3>
+                    <p class="project-card__desc">Landing page responsive con animazioni CSS e focus sulla performance.</p>
+                    <div class="project-card__tags">
+                        <span class="tag">HTML</span>
+                        <span class="tag">SCSS</span>
+                        <span class="tag">GSAP</span>
+                    </div>
+                    <div class="project-card__links">
+                        <a href="#" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                                <polyline points="15 3 21 3 21 9"/>
+                                <line x1="10" y1="14" x2="21" y2="3"/>
+                            </svg>
+                            Live
+                        </a>
+                        <a href="#" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                            </svg>
+                            Code
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Learning Path Section -->
+        <section class="section" id="path">
+            <span class="section__label">03 / Learning Path</span>
+            <h2 class="section__title">Il mio percorso</h2>
+            <p class="path__intro">
+                Il mio archivio di esercizi e progetti, dai fondamentali HTML/CSS fino a JavaScript e oltre. Ogni cartella è un passo avanti.
+                Scarica il codice, studia e sperimenta.
+            </p>
+
+            <div class="path__timeline">
+                <div class="path__item">
+                    <span class="path__week">Settimana 01</span>
+                    <h3 class="path__title">Fondamenti HTML</h3>
+                    <p class="path__content">
+                        Struttura base delle pagine web, tag semantici, form e tabelle.
+                        Include 5 esercizi pratici con soluzioni commentate.
+                    </p>
+                    <a href="#" class="path__download">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="7 10 12 15 17 10"/>
+                            <line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg>
+                        Scarica ZIP
+                    </a>
+                </div>
+
+                <div class="path__item">
+                    <span class="path__week">Settimana 02</span>
+                    <h3 class="path__title">CSS & Layout</h3>
+                    <p class="path__content">
+                        Box model, Flexbox, Grid. Responsive design e media queries.
+                        Progetti pratici: card component, navbar, footer.
+                    </p>
+                    <a href="#" class="path__download">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="7 10 12 15 17 10"/>
+                            <line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg>
+                        Scarica ZIP
+                    </a>
+                </div>
+
+                <div class="path__item">
+                    <span class="path__week">Settimana 03</span>
+                    <h3 class="path__title">JavaScript Basics</h3>
+                    <p class="path__content">
+                        Variabili, funzioni, DOM manipulation. Event listeners e form validation.
+                        Mini-progetti: to-do list, calcolatrice, quiz game.
+                    </p>
+                    <a href="#" class="path__download">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="7 10 12 15 17 10"/>
+                            <line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg>
+                        Scarica ZIP
+                    </a>
+                </div>
+
+                <div class="path__item">
+                    <span class="path__week">Settimana 04+</span>
+                    <h3 class="path__title">Progetti Avanzati</h3>
+                    <p class="path__content">
+                        API integration, async/await, local storage. 
+                        Progetto finale: web app completa con CRUD operations.
+                    </p>
+                    <a href="#" class="path__download">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="7 10 12 15 17 10"/>
+                            <line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg>
+                        Scarica ZIP
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Passions Section -->
+        <section class="section" id="passions">
+            <span class="section__label">04 / Beyond Code</span>
+            <h2 class="section__title">Le mie passioni</h2>
+
+            <div class="passions__grid">
+                <div class="passion-card">
+                    <div class="passion-card__icon">🏔️</div>
+                    <h3 class="passion-card__title">Montagna</h3>
+                    <p class="passion-card__text">
+                        I sentieri mi insegnano pazienza e determinazione. 
+                        Ogni vetta raggiunta è una metafora del coding: 
+                        un passo alla volta, senza fretta.
+                    </p>
+                    <ul class="passion-card__list">
+                        <li>Dolomiti</li>
+                        <li>Trekking</li>
+                        <li>Fotografia outdoor</li>
+                    </ul>
+                </div>
+
+                <div class="passion-card">
+                    <div class="passion-card__icon">🎵</div>
+                    <h3 class="passion-card__title">Musica</h3>
+                    <p class="passion-card__text">
+                        La colonna sonora delle mie sessioni di coding. 
+                        Dal jazz al post-rock, la musica mi aiuta a entrare nel flow.
+                    </p>
+                    <ul class="passion-card__list">
+                        <li>Spotify Playlist</li>
+                        <li>Concerti live</li>
+                        <li>Vinili</li>
+                    </ul>
+                </div>
+
+                <div class="passion-card">
+                    <div class="passion-card__icon">📚</div>
+                    <h3 class="passion-card__title">Letture</h3>
+                    <p class="passion-card__text">
+                        Libri tecnici, saggi, narrativa. 
+                        Leggere amplia la mente e migliora il problem solving.
+                    </p>
+                    <ul class="passion-card__list">
+                        <li>Clean Code</li>
+                        <li>Don't Make Me Think</li>
+                        <li>Atomic Habits</li>
+                    </ul>
+                </div>
+
+                <div class="passion-card">
+                    <div class="passion-card__icon">🤝</div>
+                    <h3 class="passion-card__title">Volontariato</h3>
+                    <p class="passion-card__text">
+                        Restituire alla comunità è importante. 
+                        Il volontariato mi tiene con i piedi per terra 
+                        e mi ricorda cosa conta davvero.
+                    </p>
+                    <ul class="passion-card__list">
+                        <li>Associazione locale</li>
+                        <li>Eventi community</li>
+                        <li>Mentoring</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="section" id="contact">
+            <span class="section__label">05 / Contatti</span>
+            <h2 class="section__title">Parliamoci</h2>
+            <p class="contact__text">
+                Cerco opportunità come junior developer. 
+                Sono aperto a collaborazioni, stage, o anche solo a scambiare due chiacchiere sul codice.
+            </p>
+
+            <div class="contact__links">
+                <a href="#" class="contact-link">
+                    <svg class="contact-link__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                        <rect x="2" y="9" width="4" height="12"/>
+                        <circle cx="4" cy="4" r="2"/>
+                    </svg>
+                    LinkedIn
+                    <span class="contact-link__arrow">→</span>
+                </a>
+                <a href="#" class="contact-link">
+                    <svg class="contact-link__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                    </svg>
+                    GitHub
+                    <span class="contact-link__arrow">→</span>
+                </a>
+                <a href="#" class="contact-link">
+                    <svg class="contact-link__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14 2 14 8 20 8"/>
+                        <line x1="16" y1="13" x2="8" y2="13"/>
+                        <line x1="16" y1="17" x2="8" y2="17"/>
+                        <polyline points="10 9 9 9 8 9"/>
+                    </svg>
+                    Scarica CV
+                    <span class="contact-link__arrow">→</span>
+                </a>
+                <a href="mailto:tuaemail@example.com" class="contact-link">
+                    <svg class="contact-link__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                        <polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                    Email
+                    <span class="contact-link__arrow">→</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p class="footer__text">
+                © 2025 — Progettato e sviluppato con ❤️ e tanto ☕
+            </p>
+        </footer>
+    </main>
+
+    <script>
+        // ========================================
+        // LOADER
+        // ========================================
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 1500);
+        });
+
+        // ========================================
+        // THEME SWITCHER
+        // ========================================
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            
+            document.querySelectorAll('.theme-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.theme === theme) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        setTheme(savedTheme);
+
+        // ========================================
+        // SCROLL ANIMATIONS
+        // ========================================
+        const sections = document.querySelectorAll('.section');
+        const navItems = document.querySelectorAll('.nav__item');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -20% 0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Update nav
+                    const sectionId = entry.target.id;
+                    navItems.forEach(item => {
+                        item.classList.remove('active');
+                        if (item.dataset.section === sectionId) {
+                            item.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+
+        // ========================================
+        // NAVIGATION CLICK
+        // ========================================
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const sectionId = item.dataset.section;
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    section.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // ========================================
+        // PROJECT FILTERS
+        // ========================================
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const filter = btn.dataset.filter;
+
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                projectCards.forEach(card => {
+                    if (filter === 'all' || card.dataset.category === filter) {
+                        card.style.display = 'block';
+                        card.style.animation = 'fadeIn 0.5s ease forwards';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+
+    <!-- Sketch p5.js -->
+    <script src="sketch.js"></script>
+</body>
+</html>
