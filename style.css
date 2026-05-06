@@ -692,6 +692,88 @@ ul, ol {
     color: var(--bg-primary);
 }
 
+/* Toggle button — stile identico a path__download ma con freccia */
+.path__toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border: 1px solid var(--accent);
+    background: transparent;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    border-radius: 2px;
+    margin-top: 4px;
+}
+
+.path__toggle:hover,
+.path__item.open .path__toggle {
+    background: var(--accent);
+    color: var(--bg-primary);
+}
+
+.path__toggle-arrow {
+    transition: transform var(--transition-fast);
+}
+
+.path__item.open .path__toggle-arrow {
+    transform: rotate(180deg);
+}
+
+/* Repos list — nascosta di default */
+.path__repos {
+    display: none;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.path__item.open .path__repos {
+    display: flex;
+}
+
+/* Singolo repo — bottone compatto */
+.path__repo-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    margin-bottom: 10px;
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    transition: var(--transition-fast);
+    border-radius: 2px;
+    width: fit-content;
+}
+
+.path__repo-btn svg {
+    color: var(--accent);
+    flex-shrink: 0;
+}
+
+.path__repo-btn:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--bg-primary);
+}
+
+.path__repo-btn:hover svg {
+    color: var(--bg-primary);
+}
+
+/* Staircase — ogni repo scalato a destra di 28px */
+.path__repos a:nth-child(1) { margin-left: 0; }
+.path__repos a:nth-child(2) { margin-left: 28px; }
+.path__repos a:nth-child(3) { margin-left: 56px; }
+.path__repos a:nth-child(4) { margin-left: 84px; }
+.path__repos a:nth-child(5) { margin-left: 112px; }
+.path__repos a:nth-child(6) { margin-left: 140px; }
+
 /* ========================================
    PASSIONS SECTION
 ======================================== */
