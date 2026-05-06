@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Web Developer</title>
+    <meta name="description" content="Junior Web Developer - Il mio percorso formativo e i miei progetti">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- p5.js per effetto grafico -->
+    <script src="p5.min.js"></script>
+</head>
+<body>
+    <!-- Sketch Background (p5.js) -->
+    <div id="sketch"></div>
+
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="loader__text">
+            <span>C</span><span>a</span><span>r</span><span>i</span><span>c</span><span>a</span><span>…</span>
+        </div>
+    </div>
+
+    <!-- Frame -->
+    <div class="frame">
+        <div class="frame__line frame__line--top"></div>
+        <div class="frame__line frame__line--bottom"></div>
+        <div class="frame__line frame__line--left"></div>
+        <div class="frame__line frame__line--right"></div>
+    </div>
+
+    <!-- Theme Switcher -->
+    <div class="theme-switcher">
+        <button class="theme-btn active" data-theme="light" onclick="setTheme('light')">
+            <svg class="theme-btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="5"/>
+                <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+            </svg>
+            Light
+        </button>
+        <button class="theme-btn" data-theme="dark" onclick="setTheme('dark')">
+            <svg class="theme-btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+            Dark
+        </button>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <ul class="nav__list">
+            <li class="nav__item active" data-section="hero">
+                <span class="nav__dot"></span>
+                <span class="nav__text">Home</span>
+            </li>
+            <li class="nav__item" data-section="about">
+                <span class="nav__dot"></span>
+                <span class="nav__text">About</span>
+            </li>
+            <li class="nav__item" data-section="projects">
+                <span class="nav__dot"></span>
+                <span class="nav__text">Progetti</span>
+            </li>
+            <li class="nav__item" data-section="path">
+                <span class="nav__dot"></span>
+                <span class="nav__text">Percorso</span>
+            </li>
+            <li class="nav__item" data-section="passions">
+                <span class="nav__dot"></span>
+                <span class="nav__text">Passioni</span>
+            </li>
+            <li class="nav__item" data-section="contact">
+                <span class="nav__dot"></span>
+                <span class="nav__text">Contatti</span>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Hero Section -->
+        <section class="hero section visible" id="hero">
+            <div class="hero__greeting">
+                <span>Ciao, sono</span>
+            </div>
+            <h1 class="hero__name">
+                <span>Andrea</span>
+                <span>Pavan</span>
+            </h1>
+            <p class="hero__title">Junior Web Developer · In continua crescita</p>
+            <div class="hero__scroll">
+                <div class="hero__scroll-line"></div>
+                <span>Scorri per esplorare</span>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="section" id="about">
+            <span class="section__label">01 / About Me</span>
+            <h2 class="section__title">Chi sono</h2>
+            <p class="about__text">
+                <span>Web developer in formazione</span> con la passione per il codice pulito e le interfacce intuitive.
+                Ho iniziato il mio percorso con il corso di Web Design di <span>Veneto Formazione</span> e ora sto frequentando il Corso Biennale
+                all' <span>ITS Digital Academy Mario Volpato</span>
+                 per Tecnico Superiore Sviluppatore Software.
+                Credo che la condivisione sia la chiave dell'apprendimento: per questo ho creato questo spazio
+                dove <span>mostro il mio percorso</span> e condivido materiale utile per aspiranti developer.
+                <br><br>
+                Quando non codifico, mi trovi sui <span>sentieri di montagna</span>, 
+                immerso nella <span>musica</span> o con un buon libro tra le mani.
+            </p>
+            <div class="about__stats">
+                <div class="stat">
+                    <div class="stat__number">15+</div>
+                    <div class="stat__label">Esercizi completati</div>
+                </div>
+                <div class="stat">
+                    <div class="stat__number">3</div>
+                    <div class="stat__label">Progetti live</div>
+                </div>
+                <div class="stat">
+                    <div class="stat__number">∞</div>
+                    <div class="stat__label">Voglia di imparare</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section class="section" id="projects">
+            <span class="section__label">02 / Progetti</span>
+            <h2 class="section__title">I miei lavori</h2>
+            
+            <div class="projects__filters">
+                <button class="filter-btn active" data-filter="all">Tutti</button>
+                <button class="filter-btn" data-filter="siti">Siti Web</button>
+                <button class="filter-btn" data-filter="webapp">Web App</button>
+                <button class="filter-btn" data-filter="figma">Bozze Figma</button>
+            </div>
+
+            <div class="projects__grid">
+                <article class="project-card" data-category="siti">
+                    <div class="project-card__preview">
+                        <img src="img/effata-preview.jpg" alt="Effata Italia">
+                    </div>
+                    <span class="project-card__number">01</span>
+                    <h3 class="project-card__title">Effata Italia</h3>
+                    <p class="project-card__desc">Sito istituzionale per un'organizzazione ODV. Tema WordPress custom con palette brandizzata, template multipli, newsletter integrata e pagina 5×1000.</p>
+                    <div class="project-card__tags">
+                        <span class="tag">WordPress</span>
+                        <span class="tag">PHP</span>
+                        <span class="tag">CSS</span>
+                    </div>
+                    <div class="project-card__links">
+                        <a href="https://effataitalia.it" target="_blank" rel="noopener" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                                <polyline points="15 3 21 3 21 9"/>
+                                <line x1="10" y1="14" x2="21" y2="3"/>
+                            </svg>
+                            Live
+                        </a>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="webapp">
+                    <div class="project-card__preview">
+                        <img src="img/calendario-preview.jpg" alt="Calendario Solidale Uganda">
+                    </div>
+                    <span class="project-card__number">02</span>
+                    <h3 class="project-card__title">Calendario Solidale Uganda</h3>
+                    <p class="project-card__desc">Web app per raccolta fondi: ogni utente adotta un giorno del calendario con una donazione di 50€. Pagamenti integrati, backend Node.js, database SQLite. Deploy su Railway.</p>
+                    <div class="project-card__tags">
+                        <span class="tag">Node.js</span>
+                        <span class="tag">SQLite</span>
+                        <span class="tag">Satispay</span>
+                        <span class="tag">Railway</span>
+                    </div>
+                    <div class="project-card__links">
+                        <a href="https://calendario.effataitalia.it" target="_blank" rel="noopener" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                                <polyline points="15 3 21 3 21 9"/>
+                                <line x1="10" y1="14" x2="21" y2="3"/>
+                            </svg>
+                            Live
+                        </a>
+                        <a href="https://github.com/pimpy67/calendario-solidale-uganda" target="_blank" rel="noopener" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                            </svg>
+                            Code
+                        </a>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="webapp">
+                    <div class="project-card__preview">
+                        <img src="img/fondi-preview.png" alt="Monitoraggio Fondi">
+                    </div>
+                    <span class="project-card__number">03</span>
+                    <h3 class="project-card__title">Monitoraggio Fondi</h3>
+                    <p class="project-card__desc">Dashboard per il monitoraggio di fondi di investimento. Filtri per settore e area geografica, indicatori tecnici RSI/MACD/EMA e segnali di acquisto in tempo reale.</p>
+                    <div class="project-card__tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">PostgreSQL</span>
+                        <span class="tag">Docker</span>
+                    </div>
+                    <div class="project-card__links">
+                        <a href="https://fondi.andreapavan.tech" target="_blank" rel="noopener" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                                <polyline points="15 3 21 3 21 9"/>
+                                <line x1="10" y1="14" x2="21" y2="3"/>
+                            </svg>
+                            Live
+                        </a>
+                        <a href="https://github.com/pimpy67/monitoraggio-fondi" target="_blank" rel="noopener" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                            </svg>
+                            Code
+                        </a>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="webapp">
+                    <div class="project-card__preview">
+                        <img src="img/etf-preview.jpg" alt="ETF Monitor System">
+                    </div>
+                    <span class="project-card__number">04</span>
+                    <h3 class="project-card__title">ETF Monitor System</h3>
+                    <p class="project-card__desc">Dashboard per il monitoraggio di ETF quotati su Borsa Italiana. Analisi tecnica con EMA13/SMA50, RSI, MACD e segnali BUY/PULLBACK/SELL su oltre 190 strumenti.</p>
+                    <div class="project-card__tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">PostgreSQL</span>
+                        <span class="tag">Docker</span>
+                    </div>
+                    <div class="project-card__links">
+                        <a href="https://etf.andreapavan.tech" target="_blank" rel="noopener" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                                <polyline points="15 3 21 3 21 9"/>
+                                <line x1="10" y1="14" x2="21" y2="3"/>
+                            </svg>
+                            Live
+                        </a>
+                        <a href="https://github.com/pimpy67/etf-monitor-system" target="_blank" rel="noopener" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                            </svg>
+                            Code
+                        </a>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="webapp">
+                    <div class="project-card__preview">
+                        <img src="img/carpro-preview.jpg" alt="CarPro Java Web">
+                    </div>
+                    <span class="project-card__number">05</span>
+                    <h3 class="project-card__title">CarPro Java Web</h3>
+                    <p class="project-card__desc">Gestionale auto con catalogo veicoli, ricerca per marca e modello, gestione disponibilità e login admin. Sviluppato in Java con Servlet e deploy su Railway.</p>
+                    <div class="project-card__tags">
+                        <span class="tag">Java</span>
+                        <span class="tag">Servlet</span>
+                        <span class="tag">SQLite</span>
+                        <span class="tag">Railway</span>
+                    </div>
+                    <div class="project-card__links">
+                        <a href="https://carprojavaweb-production.up.railway.app/catalogo" target="_blank" rel="noopener" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                                <polyline points="15 3 21 3 21 9"/>
+                                <line x1="10" y1="14" x2="21" y2="3"/>
+                            </svg>
+                            Live
+                        </a>
+                        <a href="https://github.com/pimpy67/car_pro_java_web" target="_blank" rel="noopener" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                            </svg>
+                            Code
+                        </a>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="webapp">
+                    <div class="project-card__preview">
+                        <img src="img/libri-preview.jpg" alt="Gestionale Biblioteca">
+                    </div>
+                    <span class="project-card__number">06</span>
+                    <h3 class="project-card__title">Gestionale Biblioteca</h3>
+                    <p class="project-card__desc">App per gestire la collezione di libri personale di Carlo & AnnaMaria. Catalogo, wishlist, vocabolario, ricerca e sincronizzazione. Deploy su Railway.</p>
+                    <div class="project-card__tags">
+                        <span class="tag">Java</span>
+                        <span class="tag">Railway</span>
+                    </div>
+                    <div class="project-card__links">
+                        <a href="https://gestionale-libri-production.up.railway.app" target="_blank" rel="noopener" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                                <polyline points="15 3 21 3 21 9"/>
+                                <line x1="10" y1="14" x2="21" y2="3"/>
+                            </svg>
+                            Live
+                        </a>
+                        <a href="https://github.com/pimpy67/gestionale-libri" target="_blank" rel="noopener" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                            </svg>
+                            Code
+                        </a>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="figma">
+                    <div class="project-card__preview">
+                        <img src="img/figma-altapassione-preview.png" alt="Alta Passione — Figma Layout">
+                    </div>
+                    <span class="project-card__number">07</span>
+                    <h3 class="project-card__title">Alta Passione</h3>
+                    <p class="project-card__desc">Bozza Figma per un sito di turismo alpino. Layout hero con immagine full-screen, navigazione, sezione articoli e footer. Realizzato durante il corso Veneto Formazione.</p>
+                    <div class="project-card__tags">
+                        <span class="tag">Figma</span>
+                        <span class="tag">UI Design</span>
+                        <span class="tag">Wireframe</span>
+                    </div>
+                    <div class="project-card__links">
+                        <a href="https://www.figma.com/design/ucPAvy9iIZRsiZInb1khPr/alta-passione-layout" target="_blank" rel="noopener" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H12v7H8.5A3.5 3.5 0 0 1 5 5.5z"/>
+                                <path d="M12 2h3.5a3.5 3.5 0 1 1 0 7H12V2z"/>
+                                <path d="M12 12.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 1 1-7 0z"/>
+                                <path d="M5 19.5A3.5 3.5 0 0 1 8.5 16H12v3.5a3.5 3.5 0 1 1-7 0z"/>
+                                <path d="M5 12.5A3.5 3.5 0 0 1 8.5 9H12v7H8.5A3.5 3.5 0 0 1 5 12.5z"/>
+                            </svg>
+                            Figma
+                        </a>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="figma">
+                    <div class="project-card__preview">
+                        <img src="img/figma-spa-preview.png" alt="Enfold SPA — Figma Layout">
+                    </div>
+                    <span class="project-card__number">08</span>
+                    <h3 class="project-card__title">Enfold SPA</h3>
+                    <p class="project-card__desc">Bozza Figma per un sito di centro benessere. Layout con hero, sezioni servizi (Beauty, Fitness, Yoga), newsletter, galleria e testimonial. Realizzato durante il corso Veneto Formazione.</p>
+                    <div class="project-card__tags">
+                        <span class="tag">Figma</span>
+                        <span class="tag">UI Design</span>
+                        <span class="tag">Wireframe</span>
+                    </div>
+                    <div class="project-card__links">
+                        <a href="https://www.figma.com/design/vi4CVhh42UqPNQW7lsbhla/esercizio-bozza-spa" target="_blank" rel="noopener" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H12v7H8.5A3.5 3.5 0 0 1 5 5.5z"/>
+                                <path d="M12 2h3.5a3.5 3.5 0 1 1 0 7H12V2z"/>
+                                <path d="M12 12.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 1 1-7 0z"/>
+                                <path d="M5 19.5A3.5 3.5 0 0 1 8.5 16H12v3.5a3.5 3.5 0 1 1-7 0z"/>
+                                <path d="M5 12.5A3.5 3.5 0 0 1 8.5 9H12v7H8.5A3.5 3.5 0 0 1 5 12.5z"/>
+                            </svg>
+                            Figma
+                        </a>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="figma">
+                    <div class="project-card__preview">
+                        <img src="img/figma-media-preview.png" alt="Media Evolution — Figma Layout">
+                    </div>
+                    <span class="project-card__number">09</span>
+                    <h3 class="project-card__title">Media Evolution</h3>
+                    <p class="project-card__desc">Bozza Figma per un'agenzia di produzioni e servizi video. Layout con hero, sezione servizi, portfolio progetti, sede operativa e form contatti. Realizzato durante il corso Veneto Formazione.</p>
+                    <div class="project-card__tags">
+                        <span class="tag">Figma</span>
+                        <span class="tag">UI Design</span>
+                        <span class="tag">Wireframe</span>
+                    </div>
+                    <div class="project-card__links">
+                        <a href="https://www.figma.com/design/AB4DUdKQryQGEYTGh0c8C9/esercizio-media-evolution" target="_blank" rel="noopener" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H12v7H8.5A3.5 3.5 0 0 1 5 5.5z"/>
+                                <path d="M12 2h3.5a3.5 3.5 0 1 1 0 7H12V2z"/>
+                                <path d="M12 12.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 1 1-7 0z"/>
+                                <path d="M5 19.5A3.5 3.5 0 0 1 8.5 16H12v3.5a3.5 3.5 0 1 1-7 0z"/>
+                                <path d="M5 12.5A3.5 3.5 0 0 1 8.5 9H12v7H8.5A3.5 3.5 0 0 1 5 12.5z"/>
+                            </svg>
+                            Figma
+                        </a>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="figma">
+                    <div class="project-card__preview">
+                        <img src="img/figma-venetauto-preview.png" alt="Venetauto — Figma Layout">
+                    </div>
+                    <span class="project-card__number">10</span>
+                    <h3 class="project-card__title">Venetauto</h3>
+                    <p class="project-card__desc">Bozza Figma per una concessionaria auto multimarca. Layout con hero vettura in evidenza, catalogo modelli, sezione officina, finanziamenti e mappa sede. Realizzato durante il corso Veneto Formazione.</p>
+                    <div class="project-card__tags">
+                        <span class="tag">Figma</span>
+                        <span class="tag">UI Design</span>
+                        <span class="tag">Wireframe</span>
+                    </div>
+                    <div class="project-card__links">
+                        <a href="https://www.figma.com/design/rM8Qb1j34acZk5mXjSkUxJ/venetauto6" target="_blank" rel="noopener" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H12v7H8.5A3.5 3.5 0 0 1 5 5.5z"/>
+                                <path d="M12 2h3.5a3.5 3.5 0 1 1 0 7H12V2z"/>
+                                <path d="M12 12.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 1 1-7 0z"/>
+                                <path d="M5 19.5A3.5 3.5 0 0 1 8.5 16H12v3.5a3.5 3.5 0 1 1-7 0z"/>
+                                <path d="M5 12.5A3.5 3.5 0 0 1 8.5 9H12v7H8.5A3.5 3.5 0 0 1 5 12.5z"/>
+                            </svg>
+                            Figma
+                        </a>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="figma">
+                    <div class="project-card__preview">
+                        <img src="img/figma-amelie-preview.jpg" alt="Amelie — Figma Layout">
+                    </div>
+                    <span class="project-card__number">11</span>
+                    <h3 class="project-card__title">Amelie</h3>
+                    <p class="project-card__desc">Bozza Figma per un sito di personal branding / beauty. Layout elegante con sezione "About my story", portfolio e contatti. Realizzato durante il corso Veneto Formazione.</p>
+                    <div class="project-card__tags">
+                        <span class="tag">Figma</span>
+                        <span class="tag">UI Design</span>
+                        <span class="tag">Wireframe</span>
+                    </div>
+                    <div class="project-card__links">
+                        <a href="https://www.figma.com/design/O3ZyBF2jMj6zQOO7xo2MrJ/amelie-13" target="_blank" rel="noopener" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H12v7H8.5A3.5 3.5 0 0 1 5 5.5z"/>
+                                <path d="M12 2h3.5a3.5 3.5 0 1 1 0 7H12V2z"/>
+                                <path d="M12 12.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 1 1-7 0z"/>
+                                <path d="M5 19.5A3.5 3.5 0 0 1 8.5 16H12v3.5a3.5 3.5 0 1 1-7 0z"/>
+                                <path d="M5 12.5A3.5 3.5 0 0 1 8.5 9H12v7H8.5A3.5 3.5 0 0 1 5 12.5z"/>
+                            </svg>
+                            Figma
+                        </a>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- Learning Path Section -->
+        <section class="section" id="path">
+            <span class="section__label">03 / Learning Path</span>
+            <h2 class="section__title">Il mio percorso</h2>
+            <p class="path__intro">
+                Il mio archivio di esercizi su GitHub, organizzato per argomento e difficoltà crescente.
+                Clicca una tappa per esplorare i repo.
+            </p>
+
+            <div class="path__timeline">
+
+                <div class="path__item">
+                    <button class="path__toggle">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="path__toggle-icon"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                        <span class="path__week">01 / Python</span>
+                        <span class="path__title">Python</span>
+                        <span class="path__content">Basi del linguaggio, classi e oggetti, assignment.</span>
+                        <svg class="path__toggle-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="path__repos">
+                        <a href="https://github.com/andreapavan-ops/Prove_Python" class="path__repo-btn" target="_blank" rel="noopener">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                            Prove_Python →
+                        </a>
+                        <a href="https://github.com/andreapavan-ops/PY_CLASSI_OGGETTI" class="path__repo-btn" target="_blank" rel="noopener">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                            PY_CLASSI_OGGETTI →
+                        </a>
+                        <a href="https://github.com/andreapavan-ops/py_assignment_apavan" class="path__repo-btn" target="_blank" rel="noopener">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                            py_assignment_apavan →
+                        </a>
+                    </div>
+                </div>
+
+                <div class="path__item">
+                    <button class="path__toggle">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="path__toggle-icon"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                        <span class="path__week">02 / HTML</span>
+                        <span class="path__title">HTML</span>
+                        <span class="path__content">Struttura base delle pagine web, tag semantici, form e tabelle.</span>
+                        <svg class="path__toggle-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="path__repos">
+                        <a href="https://github.com/andreapavan-ops/Html_esercizi" class="path__repo-btn" target="_blank" rel="noopener">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                            Html_esercizi →
+                        </a>
+                    </div>
+                </div>
+
+                <div class="path__item">
+                    <button class="path__toggle">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="path__toggle-icon"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                        <span class="path__week">03 / CSS & Flexbox</span>
+                        <span class="path__title">CSS & Flexbox</span>
+                        <span class="path__content">Box model, Flexbox, Grid. Responsive design e media queries.</span>
+                        <svg class="path__toggle-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="path__repos">
+                        <a href="https://github.com/andreapavan-ops/CSS_esercizi" class="path__repo-btn" target="_blank" rel="noopener">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                            CSS_esercizi →
+                        </a>
+                        <a href="https://github.com/andreapavan-ops/FLEX_esercizi" class="path__repo-btn" target="_blank" rel="noopener">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                            FLEX_esercizi →
+                        </a>
+                    </div>
+                </div>
+
+                <div class="path__item">
+                    <button class="path__toggle">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="path__toggle-icon"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                        <span class="path__week">04 / Java</span>
+                        <span class="path__title">Java</span>
+                        <span class="path__content">Fondamentali del linguaggio, OOP e strutture dati.</span>
+                        <svg class="path__toggle-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="path__repos">
+                        <a href="https://github.com/andreapavan-ops/JA_ESERCIZI_JAVA" class="path__repo-btn" target="_blank" rel="noopener">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                            JA_ESERCIZI_JAVA →
+                        </a>
+                        <a href="https://github.com/andreapavan-ops/Prove_Java" class="path__repo-btn" target="_blank" rel="noopener">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                            Prove_Java →
+                        </a>
+                    </div>
+                </div>
+
+                <div class="path__item">
+                    <button class="path__toggle">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="path__toggle-icon"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                        <span class="path__week">05 / JavaScript</span>
+                        <span class="path__title">JavaScript</span>
+                        <span class="path__content">Fondamentali, DOM manipulation, eventi, async/await.</span>
+                        <svg class="path__toggle-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="path__repos">
+                        <a href="https://github.com/andreapavan-ops/JAVASCRIPT" class="path__repo-btn" target="_blank" rel="noopener">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                            JAVASCRIPT →
+                        </a>
+                        <a href="https://github.com/andreapavan-ops/esempi_javascript" class="path__repo-btn" target="_blank" rel="noopener">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                            esempi_javascript →
+                        </a>
+                        <a href="https://github.com/andreapavan-ops/JAVASCRIPT_DOM" class="path__repo-btn" target="_blank" rel="noopener">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                            JAVASCRIPT_DOM →
+                        </a>
+                        <a href="https://github.com/andreapavan-ops/javascript_dom_teoria" class="path__repo-btn" target="_blank" rel="noopener">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                            javascript_dom_teoria →
+                        </a>
+                        <a href="https://github.com/andreapavan-ops/JAVASCRIPT_EVENTI" class="path__repo-btn" target="_blank" rel="noopener">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                            JAVASCRIPT_EVENTI →
+                        </a>
+                        <a href="https://github.com/andreapavan-ops/JAVASCRIPT_ASYNC_AWAIT" class="path__repo-btn" target="_blank" rel="noopener">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                            JAVASCRIPT_ASYNC_AWAIT →
+                        </a>
+                    </div>
+                </div>
+
+                <div class="path__item">
+                    <button class="path__toggle">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="path__toggle-icon"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                        <span class="path__week">06 / Backend</span>
+                        <span class="path__title">Backend — Node / Express</span>
+                        <span class="path__content">Server HTTP, routing, API REST con Node.js ed Express.</span>
+                        <svg class="path__toggle-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="path__repos">
+                        <a href="https://github.com/andreapavan-ops/corso-backend" class="path__repo-btn" target="_blank" rel="noopener">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                            corso-backend →
+                        </a>
+                    </div>
+                </div>
+
+                <div class="path__item">
+                    <button class="path__toggle">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="path__toggle-icon"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                        <span class="path__week">07 / Database</span>
+                        <span class="path__title">Database</span>
+                        <span class="path__content">SQL e progettazione di database relazionali.</span>
+                        <svg class="path__toggle-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="path__repos">
+                        <a href="https://github.com/andreapavan-ops/DATABASE" class="path__repo-btn" target="_blank" rel="noopener">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                            DATABASE →
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Passions Section -->
+        <section class="section" id="passions">
+            <span class="section__label">04 / Beyond Code</span>
+            <h2 class="section__title">Le mie passioni</h2>
+
+            <div class="passions__grid">
+                <div class="passion-card">
+                    <div class="passion-card__icon">🏔️</div>
+                    <h3 class="passion-card__title">Montagna</h3>
+                    <p class="passion-card__text">
+                        I sentieri mi insegnano pazienza e determinazione. 
+                        Ogni vetta raggiunta è una metafora del coding: 
+                        un passo alla volta, senza fretta.
+                    </p>
+                    <ul class="passion-card__list">
+                        <li>Dolomiti</li>
+                        <li>Trekking</li>
+                        <li>Fotografia outdoor</li>
+                    </ul>
+                </div>
+
+                <div class="passion-card">
+                    <div class="passion-card__icon">🎵</div>
+                    <h3 class="passion-card__title">Musica</h3>
+                    <p class="passion-card__text">
+                        La colonna sonora delle mie sessioni di coding. 
+                        Dal jazz al post-rock, la musica mi aiuta a entrare nel flow.
+                    </p>
+                    <ul class="passion-card__list">
+                        <li>Spotify Playlist</li>
+                        <li>Concerti live</li>
+                        <li>Vinili</li>
+                    </ul>
+                </div>
+
+                <div class="passion-card">
+                    <div class="passion-card__icon">📚</div>
+                    <h3 class="passion-card__title">Letture</h3>
+                    <p class="passion-card__text">
+                        Libri tecnici, saggi, narrativa. 
+                        Leggere amplia la mente e migliora il problem solving.
+                    </p>
+                    <ul class="passion-card__list">
+                        <li>Clean Code</li>
+                        <li>Don't Make Me Think</li>
+                        <li>Atomic Habits</li>
+                    </ul>
+                </div>
+
+                <div class="passion-card">
+                    <div class="passion-card__icon">🤝</div>
+                    <h3 class="passion-card__title">Volontariato</h3>
+                    <p class="passion-card__text">
+                        Restituire alla comunità è importante. 
+                        Il volontariato mi tiene con i piedi per terra 
+                        e mi ricorda cosa conta davvero.
+                    </p>
+                    <ul class="passion-card__list">
+                        <li>Associazione locale</li>
+                        <li>Eventi community</li>
+                        <li>Mentoring</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="section" id="contact">
+            <span class="section__label">05 / Contatti</span>
+            <h2 class="section__title">Parliamoci</h2>
+            <p class="contact__text">
+                Cerco opportunità come junior developer. 
+                Sono aperto a collaborazioni, stage, o anche solo a scambiare due chiacchiere sul codice.
+            </p>
+
+            <div class="contact__links">
+                <a href="https://www.linkedin.com/in/andrea-pavan67/" target="_blank" rel="noopener" class="contact-link">
+                    <svg class="contact-link__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                        <rect x="2" y="9" width="4" height="12"/>
+                        <circle cx="4" cy="4" r="2"/>
+                    </svg>
+                    LinkedIn
+                    <span class="contact-link__arrow">→</span>
+                </a>
+                <a href="https://github.com/pimpy67" target="_blank" rel="noopener" class="contact-link">
+                    <svg class="contact-link__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                    </svg>
+                    GitHub — Progetti
+                    <span class="contact-link__arrow">→</span>
+                </a>
+                <a href="https://github.com/andreapavan-ops" target="_blank" rel="noopener" class="contact-link">
+                    <svg class="contact-link__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                    </svg>
+                    GitHub — Esercizi
+                    <span class="contact-link__arrow">→</span>
+                </a>
+                <a href="CV_AndreaPavan2026.pdf" download class="contact-link">
+                    <svg class="contact-link__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14 2 14 8 20 8"/>
+                        <line x1="16" y1="13" x2="8" y2="13"/>
+                        <line x1="16" y1="17" x2="8" y2="17"/>
+                        <polyline points="10 9 9 9 8 9"/>
+                    </svg>
+                    Scarica CV
+                    <span class="contact-link__arrow">→</span>
+                </a>
+                <a href="https://www.instagram.com/andreapavan67/" target="_blank" rel="noopener" class="contact-link">
+                    <svg class="contact-link__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                    </svg>
+                    Instagram
+                    <span class="contact-link__arrow">→</span>
+                </a>
+                <a href="https://www.facebook.com/andrea.tucuman/" target="_blank" rel="noopener" class="contact-link">
+                    <svg class="contact-link__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                    </svg>
+                    Facebook
+                    <span class="contact-link__arrow">→</span>
+                </a>
+                <a href="mailto:andreapavan67@gmail.com" class="contact-link">
+                    <svg class="contact-link__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                        <polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                    Email
+                    <span class="contact-link__arrow">→</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <a href="CV_AndreaPavan2026.pdf" download class="footer__cv">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                    <polyline points="14 2 14 8 20 8"/>
+                    <line x1="12" y1="18" x2="12" y2="12"/>
+                    <polyline points="9 15 12 18 15 15"/>
+                </svg>
+                Scarica CV
+            </a>
+            <p class="footer__text">
+                © 2026 — Progettato e sviluppato con ❤️ e tanto ☕
+            </p>
+        </footer>
+    </main>
+
+    <script>
+        // ========================================
+        // LOADER
+        // ========================================
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 1500);
+        });
+
+        // ========================================
+        // THEME SWITCHER
+        // ========================================
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            
+            document.querySelectorAll('.theme-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.theme === theme) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        setTheme(savedTheme);
+
+        // ========================================
+        // SCROLL ANIMATIONS
+        // ========================================
+        const sections = document.querySelectorAll('.section');
+        const navItems = document.querySelectorAll('.nav__item');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -20% 0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Update nav
+                    const sectionId = entry.target.id;
+                    navItems.forEach(item => {
+                        item.classList.remove('active');
+                        if (item.dataset.section === sectionId) {
+                            item.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+
+        // ========================================
+        // NAVIGATION CLICK
+        // ========================================
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const sectionId = item.dataset.section;
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    section.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // ========================================
+        // LEARNING PATH TOGGLE
+        // ========================================
+        document.querySelectorAll('.path__toggle').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const item = btn.closest('.path__item');
+                const isOpen = item.classList.contains('open');
+                document.querySelectorAll('.path__item').forEach(i => i.classList.remove('open'));
+                if (!isOpen) item.classList.add('open');
+            });
+        });
+
+        // ========================================
+        // PROJECT FILTERS
+        // ========================================
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const filter = btn.dataset.filter;
+
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                projectCards.forEach(card => {
+                    if (filter === 'all' || card.dataset.category === filter) {
+                        card.style.display = 'block';
+                        card.style.animation = 'fadeIn 0.5s ease forwards';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+
+    <!-- Sketch p5.js -->
+    <script src="sketch.js"></script>
+</body>
+</html>
