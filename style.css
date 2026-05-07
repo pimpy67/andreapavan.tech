@@ -977,11 +977,12 @@ ul, ol {
 
     .path__toggle {
         flex-wrap: wrap;
-        gap: 8px 12px;
+        align-items: flex-start;
+        gap: 6px 12px;
     }
 
     .path__content {
-        flex-basis: 100%;
+        flex: 0 0 100%;
         text-align: left;
         padding-right: 0;
         order: 5;
@@ -989,6 +990,7 @@ ul, ol {
 
     .path__toggle-arrow {
         margin-left: 0;
+        order: 4;
     }
 }
 
