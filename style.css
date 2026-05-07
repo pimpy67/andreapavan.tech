@@ -975,6 +975,12 @@ ul, ol {
         font-size: clamp(2.5rem, 12vw, 4rem);
     }
 
+    .section {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+
     .path__toggle {
         display: grid;
         grid-template-columns: auto auto 1fr auto;
