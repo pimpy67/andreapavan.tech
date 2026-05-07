@@ -7,10 +7,7 @@ let time = 0;
 let dark = true;
 let mouseInfluence = { x: 0, y: 0 };
 let targetMouse = { x: 0, y: 0 };
-let isMobile = window.innerWidth <= 768;
-
 function setup() {
-  if (isMobile) { noLoop(); return; }
   let c = createCanvas(windowWidth, windowHeight);
   c.parent("sketch");
   pixelDensity(Math.min(2, window.devicePixelRatio));
@@ -36,7 +33,6 @@ function setup() {
 }
 
 function draw() {
-  if (isMobile) return;
   // sfondo con leggera trasparenza per trail sottile
   background(dark ? 0 : 0, dark ? 0 : 0, dark ? 5 : 97, 15);
 
@@ -136,7 +132,6 @@ function mouseMoved() {
 }
 
 function windowResized() {
-  if (isMobile) return;
   resizeCanvas(windowWidth, windowHeight);
 }
 
