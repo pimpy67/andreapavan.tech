@@ -974,6 +974,22 @@ ul, ol {
     .hero__name {
         font-size: clamp(2.5rem, 12vw, 4rem);
     }
+
+    .path__toggle {
+        flex-wrap: wrap;
+        gap: 8px 12px;
+    }
+
+    .path__content {
+        flex-basis: 100%;
+        text-align: left;
+        padding-right: 0;
+        order: 5;
+    }
+
+    .path__toggle-arrow {
+        margin-left: 0;
+    }
 }
 
 /* ========================================
