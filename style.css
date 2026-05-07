@@ -976,21 +976,25 @@ ul, ol {
     }
 
     .path__toggle {
-        flex-wrap: wrap;
-        align-items: flex-start;
-        gap: 6px 12px;
+        display: grid;
+        grid-template-columns: auto auto 1fr auto;
+        grid-template-rows: auto auto;
+        column-gap: 12px;
+        row-gap: 4px;
+        align-items: center;
     }
+
+    .path__toggle-icon  { grid-column: 1; grid-row: 1; }
+    .path__week         { grid-column: 2; grid-row: 1; }
+    .path__title        { grid-column: 3; grid-row: 1; }
+    .path__toggle-arrow { grid-column: 4; grid-row: 1; margin-left: 0; }
 
     .path__content {
-        flex: 0 0 100%;
+        grid-column: 1 / -1;
+        grid-row: 2;
         text-align: left;
         padding-right: 0;
-        order: 5;
-    }
-
-    .path__toggle-arrow {
-        margin-left: 0;
-        order: 4;
+        flex: none;
     }
 }
 
