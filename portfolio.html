@@ -820,10 +820,11 @@
         const sections = document.querySelectorAll('.section');
         const navItems = document.querySelectorAll('.nav__item');
 
+        const isMobile = window.innerWidth <= 768;
         const observerOptions = {
             root: null,
-            rootMargin: '-20% 0px -20% 0px',
-            threshold: 0.1
+            rootMargin: isMobile ? '0px' : '-20% 0px -20% 0px',
+            threshold: isMobile ? 0 : 0.1
         };
 
         const observer = new IntersectionObserver((entries) => {
