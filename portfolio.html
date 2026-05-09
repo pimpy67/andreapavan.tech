@@ -27,7 +27,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="style.css?v=9">
+    <link rel="stylesheet" href="style.css?v=10">
 
     <!-- p5.js per effetto grafico -->
     <script src="p5.min.js"></script>
@@ -658,6 +658,11 @@
                         Ogni vetta raggiunta è una metafora del coding:
                         un passo alla volta, senza fretta.
                     </p>
+                    <ul class="passion-card__list">
+                        <li>Dolomiti &amp; Ferrate — Dove la logica si fa roccia</li>
+                        <li>Trekking — La meditazione in movimento</li>
+                        <li>Fotografia Outdoor — Quando la fatica diventa bellezza</li>
+                    </ul>
                     <div class="music-bio" id="mountainBio">
                         <p><em>"La montagna mi ha insegnato a non barare, a essere vero con me stesso e con quello che facevo."</em> — Walter Bonatti</p>
                         <p>Per me, un sentiero di montagna e una sessione di coding condividono la stessa radice: l'onestà del fare. Come nelle grandi scalate di Bonatti, dove non contava arrivare in cima con ogni mezzo ma come ci si arrivava, anche nella programmazione la qualità della soluzione conta quanto il risultato finale.</p>
@@ -923,6 +928,16 @@
         });
 
         // ========================================
+        // SHARED CAROUSEL SYNC TIMER
+        // ========================================
+        let syncTimer;
+        const syncListeners = [];
+        function resetSyncTimer() {
+            clearInterval(syncTimer);
+            syncTimer = setInterval(() => syncListeners.forEach(fn => fn()), 4500);
+        }
+
+        // ========================================
         // MUSIC CAROUSEL
         // ========================================
         (function () {
@@ -942,13 +957,12 @@
             const epochEl  = document.getElementById('musicEpoch');
             const artistEl = document.getElementById('musicArtist');
             let current = 0;
-            let autoTimer;
 
             tracks.forEach((_, i) => {
                 const d = document.createElement('button');
                 d.className = 'mountain-carousel__dot' + (i === 0 ? ' active' : '');
                 d.setAttribute('aria-label', 'Traccia ' + (i + 1));
-                d.addEventListener('click', e => { e.stopPropagation(); goTo(i); resetAuto(); });
+                d.addEventListener('click', e => { e.stopPropagation(); goTo(i); resetSyncTimer(); });
                 dotsWrap.appendChild(d);
             });
 
@@ -964,15 +978,10 @@
                 artistEl.textContent = tracks[current].artist;
             }
 
-            function resetAuto() {
-                clearInterval(autoTimer);
-                autoTimer = setInterval(() => goTo(current + 1), 5000);
-            }
+            syncListeners.push(() => goTo(current + 1));
 
-            mc.querySelector('.mountain-carousel__btn--prev').addEventListener('click', e => { e.stopPropagation(); goTo(current - 1); resetAuto(); });
-            mc.querySelector('.mountain-carousel__btn--next').addEventListener('click', e => { e.stopPropagation(); goTo(current + 1); resetAuto(); });
-
-            resetAuto();
+            mc.querySelector('.mountain-carousel__btn--prev').addEventListener('click', e => { e.stopPropagation(); goTo(current - 1); resetSyncTimer(); });
+            mc.querySelector('.mountain-carousel__btn--next').addEventListener('click', e => { e.stopPropagation(); goTo(current + 1); resetSyncTimer(); });
 
             mc.addEventListener('click', () => {
                 window.open('https://www.youtube.com/watch?v=' + tracks[current].id + '&list=PLf4g5YwwUXK11ziqKY5Shs3PIEkt-rfag', '_blank', 'noopener noreferrer');
@@ -1004,7 +1013,6 @@
             const imgs     = Array.from(carousel.querySelectorAll('.mountain-carousel__img'));
             const dotsWrap = document.getElementById('carouselDots');
             let current = 0;
-            let autoTimer;
 
             // Build dots
             imgs.forEach((_, i) => {
@@ -1025,19 +1033,14 @@
                 dots[current].classList.add('active');
             }
 
-            function resetAuto() {
-                clearInterval(autoTimer);
-                autoTimer = setInterval(() => goTo(current + 1), 4000);
-            }
+            syncListeners.push(() => goTo(current + 1));
 
             carousel.querySelector('.mountain-carousel__btn--prev').addEventListener('click', e => {
-                e.stopPropagation(); goTo(current - 1); resetAuto();
+                e.stopPropagation(); goTo(current - 1); resetSyncTimer();
             });
             carousel.querySelector('.mountain-carousel__btn--next').addEventListener('click', e => {
-                e.stopPropagation(); goTo(current + 1); resetAuto();
+                e.stopPropagation(); goTo(current + 1); resetSyncTimer();
             });
-
-            resetAuto();
 
             // Zoom in/out on click
             function collapse() {
@@ -1066,6 +1069,8 @@
                 }
             });
         })();
+
+        resetSyncTimer();
 
         // ========================================
         // PROJECT FILTERS
