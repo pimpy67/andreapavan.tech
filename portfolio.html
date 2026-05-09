@@ -27,7 +27,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="style.css?v=6">
+    <link rel="stylesheet" href="style.css?v=7">
 
     <!-- p5.js per effetto grafico -->
     <script src="p5.min.js"></script>
@@ -666,13 +666,22 @@
                 </div>
 
                 <div class="passion-card passion-card--musica">
-                    <div class="music-video">
-                        <iframe src="https://www.youtube.com/embed/CqFyZ1wC148?list=PLf4g5YwwUXK11ziqKY5Shs3PIEkt-rfag"
-                            title="Il mio percorso musicale"
-                            frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            referrerpolicy="strict-origin-when-cross-origin"
-                            allowfullscreen></iframe>
+                    <div class="music-carousel" id="musicCarousel">
+                        <img src="https://img.youtube.com/vi/CqFyZ1wC148/hqdefault.jpg" alt="Francesco Guccini" class="music-carousel__img active">
+                        <img src="https://img.youtube.com/vi/bpZvg_FjL3Q/hqdefault.jpg" alt="Bob Dylan" class="music-carousel__img">
+                        <img src="https://img.youtube.com/vi/N4zPu3ISCGs/hqdefault.jpg" alt="Jethro Tull" class="music-carousel__img">
+                        <img src="https://img.youtube.com/vi/qh-jVXyn5CM/hqdefault.jpg" alt="The Cure" class="music-carousel__img">
+                        <img src="https://img.youtube.com/vi/XFkzRNyygfk/hqdefault.jpg" alt="Radiohead" class="music-carousel__img">
+                        <img src="https://img.youtube.com/vi/KHocVRUlvkk/hqdefault.jpg" alt="Placebo" class="music-carousel__img">
+                        <img src="https://img.youtube.com/vi/OMaycNcPsHI/hqdefault.jpg" alt="Fontaines D.C." class="music-carousel__img">
+                        <div class="music-carousel__play">&#9654;</div>
+                        <div class="music-carousel__label">
+                            <span class="music-carousel__epoch" id="musicEpoch">Le Radici</span>
+                            <span class="music-carousel__artist" id="musicArtist">Francesco Guccini</span>
+                        </div>
+                        <button class="mountain-carousel__btn mountain-carousel__btn--prev" aria-label="Precedente">&#8249;</button>
+                        <button class="mountain-carousel__btn mountain-carousel__btn--next" aria-label="Successivo">&#8250;</button>
+                        <div class="music-carousel__dots" id="musicDots"></div>
                     </div>
                     <div class="passion-card__icon">🎵</div>
                     <h3 class="passion-card__title">Il mio viaggio musicale</h3>
@@ -688,7 +697,7 @@
                         <li><strong>La Generazione</strong> — Radiohead &amp; Placebo</li>
                         <li><strong>Il Presente</strong> — Fontaines D.C.</li>
                     </ul>
-                    <p class="passion-card__cta">Premi play per esplorare queste pillole musicali insieme a me.</p>
+                    <p class="passion-card__cta">Clicca sulla cover per ascoltare su YouTube.</p>
                 </div>
 
                 <div class="passion-card">
@@ -895,6 +904,63 @@
                 if (!isOpen) item.classList.add('open');
             });
         });
+
+        // ========================================
+        // MUSIC CAROUSEL
+        // ========================================
+        (function () {
+            const tracks = [
+                { id: 'CqFyZ1wC148', epoch: 'Le Radici',      artist: 'Francesco Guccini' },
+                { id: 'bpZvg_FjL3Q', epoch: 'La Lotta',       artist: 'Bob Dylan' },
+                { id: 'N4zPu3ISCGs', epoch: "L'Evoluzione",   artist: 'Jethro Tull' },
+                { id: 'qh-jVXyn5CM', epoch: "L'Oscurità",     artist: 'The Cure' },
+                { id: 'XFkzRNyygfk', epoch: 'La Generazione', artist: 'Radiohead' },
+                { id: 'KHocVRUlvkk', epoch: 'La Generazione', artist: 'Placebo' },
+                { id: 'OMaycNcPsHI', epoch: 'Il Presente',    artist: 'Fontaines D.C.' },
+            ];
+
+            const mc       = document.getElementById('musicCarousel');
+            const imgs     = Array.from(mc.querySelectorAll('.music-carousel__img'));
+            const dotsWrap = document.getElementById('musicDots');
+            const epochEl  = document.getElementById('musicEpoch');
+            const artistEl = document.getElementById('musicArtist');
+            let current = 0;
+            let autoTimer;
+
+            tracks.forEach((_, i) => {
+                const d = document.createElement('button');
+                d.className = 'mountain-carousel__dot' + (i === 0 ? ' active' : '');
+                d.setAttribute('aria-label', 'Traccia ' + (i + 1));
+                d.addEventListener('click', e => { e.stopPropagation(); goTo(i); resetAuto(); });
+                dotsWrap.appendChild(d);
+            });
+
+            const dots = Array.from(dotsWrap.querySelectorAll('.mountain-carousel__dot'));
+
+            function goTo(idx) {
+                imgs[current].classList.remove('active');
+                dots[current].classList.remove('active');
+                current = (idx + tracks.length) % tracks.length;
+                imgs[current].classList.add('active');
+                dots[current].classList.add('active');
+                epochEl.textContent = tracks[current].epoch;
+                artistEl.textContent = tracks[current].artist;
+            }
+
+            function resetAuto() {
+                clearInterval(autoTimer);
+                autoTimer = setInterval(() => goTo(current + 1), 5000);
+            }
+
+            mc.querySelector('.mountain-carousel__btn--prev').addEventListener('click', e => { e.stopPropagation(); goTo(current - 1); resetAuto(); });
+            mc.querySelector('.mountain-carousel__btn--next').addEventListener('click', e => { e.stopPropagation(); goTo(current + 1); resetAuto(); });
+
+            resetAuto();
+
+            mc.addEventListener('click', () => {
+                window.open('https://www.youtube.com/watch?v=' + tracks[current].id + '&list=PLf4g5YwwUXK11ziqKY5Shs3PIEkt-rfag', '_blank', 'noopener noreferrer');
+            });
+        })();
 
         // ========================================
         // MOUNTAIN CAROUSEL + ZOOM
