@@ -27,7 +27,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="style.css?v=8">
+    <link rel="stylesheet" href="style.css?v=9">
 
     <!-- p5.js per effetto grafico -->
     <script src="p5.min.js"></script>
@@ -658,11 +658,17 @@
                         Ogni vetta raggiunta è una metafora del coding:
                         un passo alla volta, senza fretta.
                     </p>
-                    <ul class="passion-card__list">
-                        <li>Dolomiti &amp; ferrate</li>
-                        <li>Trekking</li>
-                        <li>Fotografia outdoor</li>
-                    </ul>
+                    <div class="music-bio" id="mountainBio">
+                        <p><em>"La montagna mi ha insegnato a non barare, a essere vero con me stesso e con quello che facevo."</em> — Walter Bonatti</p>
+                        <p>Per me, un sentiero di montagna e una sessione di coding condividono la stessa radice: l'onestà del fare. Come nelle grandi scalate di Bonatti, dove non contava arrivare in cima con ogni mezzo ma come ci si arrivava, anche nella programmazione la qualità della soluzione conta quanto il risultato finale.</p>
+                        <p><strong>Pazienza e Metodo:</strong> Ogni vetta raggiunta è una metafora dello sviluppo — un passo dopo l'altro, un bug risolto dopo l'altro. Non esiste la fretta, esiste solo il ritmo giusto.</p>
+                        <p><strong>Determinazione:</strong> La ferrata mi insegna la gestione del rischio e la tenacia; il coding trasforma quella determinazione in rigore logico.</p>
+                        <p>In entrambi i mondi, la vera conquista non è il dominio sulla materia o sulla parete, ma la scoperta della propria capacità di superare l'ostacolo.</p>
+                        <p><strong>Dolomiti &amp; Ferrate</strong> — Dove la logica si fa roccia.<br>
+                        <strong>Trekking</strong> — La meditazione in movimento.<br>
+                        <strong>Fotografia Outdoor</strong> — Catturare l'istante in cui la fatica diventa bellezza.</p>
+                    </div>
+                    <button class="music-bio__toggle" id="mountainBioToggle">Leggi di più ↓</button>
                 </div>
 
                 <div class="passion-card passion-card--musica">
@@ -972,12 +978,20 @@
                 window.open('https://www.youtube.com/watch?v=' + tracks[current].id + '&list=PLf4g5YwwUXK11ziqKY5Shs3PIEkt-rfag', '_blank', 'noopener noreferrer');
             });
 
-            // Leggi di più toggle
+            // Leggi di più toggle musica
             const bioToggle = document.getElementById('musicBioToggle');
             const bio = document.getElementById('musicBio');
             bioToggle.addEventListener('click', () => {
                 const isOpen = bio.classList.toggle('open');
                 bioToggle.textContent = isOpen ? 'Mostra meno ↑' : 'Leggi di più ↓';
+            });
+
+            // Leggi di più toggle montagna
+            const mountainBioToggle = document.getElementById('mountainBioToggle');
+            const mountainBio = document.getElementById('mountainBio');
+            mountainBioToggle.addEventListener('click', () => {
+                const isOpen = mountainBio.classList.toggle('open');
+                mountainBioToggle.textContent = isOpen ? 'Mostra meno ↑' : 'Leggi di più ↓';
             });
         })();
 
