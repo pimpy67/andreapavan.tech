@@ -955,7 +955,7 @@ ul, ol {
 .music-video {
     position: relative;
     width: 100%;
-    aspect-ratio: 16 / 9;
+    height: 300px;
 }
 
 .music-video iframe {
