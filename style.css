@@ -821,6 +821,148 @@ ul, ol {
 }
 
 /* ========================================
+   MOUNTAIN CAROUSEL
+======================================== */
+.passion-card--montagna {
+    padding: 0;
+    overflow: hidden;
+}
+
+.passion-card--montagna .passion-card__icon,
+.passion-card--montagna .passion-card__title,
+.passion-card--montagna .passion-card__text,
+.passion-card--montagna .passion-card__list {
+    padding-left: 32px;
+    padding-right: 32px;
+}
+
+.passion-card--montagna .passion-card__icon { margin-top: 24px; }
+.passion-card--montagna .passion-card__list  { margin-bottom: 32px; }
+
+.mountain-carousel {
+    position: relative;
+    width: 100%;
+    height: 230px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.mountain-carousel__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+.mountain-carousel__img.active { opacity: 1; }
+
+.mountain-carousel__btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.45);
+    color: #fff;
+    border: none;
+    width: 34px;
+    height: 34px;
+    font-size: 1.4rem;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.mountain-carousel__btn:hover { background: rgba(0, 0, 0, 0.75); }
+.mountain-carousel__btn--prev { left: 10px; }
+.mountain-carousel__btn--next { right: 10px; }
+
+.mountain-carousel__dots {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+    z-index: 2;
+}
+
+.mountain-carousel__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.45);
+    cursor: pointer;
+    transition: background 0.2s;
+    border: none;
+    padding: 0;
+}
+
+.mountain-carousel__dot.active { background: var(--accent); }
+
+/* ========================================
+   LIGHTBOX
+======================================== */
+.lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.93);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox.open { display: flex; }
+
+.lightbox__img {
+    max-width: 90vw;
+    max-height: 86vh;
+    object-fit: contain;
+    display: block;
+}
+
+.lightbox__close {
+    position: absolute;
+    top: 18px;
+    right: 22px;
+    color: #fff;
+    font-size: 1.6rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    line-height: 1;
+    opacity: 0.75;
+    transition: opacity 0.2s;
+}
+
+.lightbox__close:hover { opacity: 1; }
+
+.lightbox__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #fff;
+    font-size: 2.8rem;
+    background: rgba(0, 0, 0, 0.35);
+    border: none;
+    padding: 6px 16px;
+    cursor: pointer;
+    line-height: 1;
+    transition: background 0.2s;
+}
+
+.lightbox__nav:hover { background: rgba(0, 0, 0, 0.65); }
+.lightbox__nav--prev { left: 12px; }
+.lightbox__nav--next { right: 12px; }
+
+/* ========================================
    CONTACT SECTION
 ======================================== */
 .contact__text {

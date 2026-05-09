@@ -637,16 +637,30 @@
             <h2 class="section__title">Le mie passioni</h2>
 
             <div class="passions__grid">
-                <div class="passion-card">
+                <div class="passion-card passion-card--montagna">
+                    <div class="mountain-carousel" id="mountainCarousel" title="Clicca per aprire">
+                        <img src="img/FOTO_MONTAGNA_MIO_SITO/processed/IMG_ILMIOSITO7.jpg"  alt="Tramonto in vetta" class="mountain-carousel__img active">
+                        <img src="img/FOTO_MONTAGNA_MIO_SITO/processed/IMG_ILMIOSITO9.jpg"  alt="Cresta al tramonto"  class="mountain-carousel__img">
+                        <img src="img/FOTO_MONTAGNA_MIO_SITO/processed/IMG_ILMIOSITO.jpg"   alt="Ferrata Dolomiti"   class="mountain-carousel__img">
+                        <img src="img/FOTO_MONTAGNA_MIO_SITO/processed/IMG_ILMIOSITO0.jpg"  alt="Gruppo in ferrata"  class="mountain-carousel__img">
+                        <img src="img/FOTO_MONTAGNA_MIO_SITO/processed/IMG_ILMIOSITO5.jpg"  alt="Vetta con croce"    class="mountain-carousel__img">
+                        <img src="img/FOTO_MONTAGNA_MIO_SITO/processed/IMG_ILMIOSITO2.jpg"  alt="Arrampicata"        class="mountain-carousel__img">
+                        <img src="img/FOTO_MONTAGNA_MIO_SITO/processed/IMG_ILMIOSITO6.jpg"  alt="Ferrata su parete"  class="mountain-carousel__img">
+                        <img src="img/FOTO_MONTAGNA_MIO_SITO/processed/IMG_ILMIOSIT04.jpg"  alt="Vallata dolomitica" class="mountain-carousel__img">
+                        <img src="img/FOTO_MONTAGNA_MIO_SITO/processed/IMG_ILMIOSITO3.jpg"  alt="Panorama verde"     class="mountain-carousel__img">
+                        <button class="mountain-carousel__btn mountain-carousel__btn--prev" aria-label="Precedente">&#8249;</button>
+                        <button class="mountain-carousel__btn mountain-carousel__btn--next" aria-label="Successivo">&#8250;</button>
+                        <div class="mountain-carousel__dots" id="carouselDots"></div>
+                    </div>
                     <div class="passion-card__icon">🏔️</div>
                     <h3 class="passion-card__title">Montagna</h3>
                     <p class="passion-card__text">
-                        I sentieri mi insegnano pazienza e determinazione. 
-                        Ogni vetta raggiunta è una metafora del coding: 
+                        I sentieri mi insegnano pazienza e determinazione.
+                        Ogni vetta raggiunta è una metafora del coding:
                         un passo alla volta, senza fretta.
                     </p>
                     <ul class="passion-card__list">
-                        <li>Dolomiti</li>
+                        <li>Dolomiti &amp; ferrate</li>
                         <li>Trekking</li>
                         <li>Fotografia outdoor</li>
                     </ul>
@@ -785,6 +799,14 @@
         </footer>
     </main>
 
+    <!-- Lightbox Montagna -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+        <button class="lightbox__close" id="lightboxClose" aria-label="Chiudi">&#x2715;</button>
+        <button class="lightbox__nav lightbox__nav--prev" id="lightboxPrev" aria-label="Precedente">&#8249;</button>
+        <img class="lightbox__img" id="lightboxImg" src="" alt="">
+        <button class="lightbox__nav lightbox__nav--next" id="lightboxNext" aria-label="Successivo">&#8250;</button>
+    </div>
+
     <script>
         // ========================================
         // LOADER
@@ -870,6 +892,82 @@
                 if (!isOpen) item.classList.add('open');
             });
         });
+
+        // ========================================
+        // MOUNTAIN CAROUSEL + LIGHTBOX
+        // ========================================
+        (function () {
+            const carousel   = document.getElementById('mountainCarousel');
+            const imgs       = Array.from(carousel.querySelectorAll('.mountain-carousel__img'));
+            const dotsWrap   = document.getElementById('carouselDots');
+            const lightbox   = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+            let current = 0;
+            let autoTimer;
+
+            // Build dots
+            imgs.forEach((_, i) => {
+                const d = document.createElement('button');
+                d.className = 'mountain-carousel__dot' + (i === 0 ? ' active' : '');
+                d.setAttribute('aria-label', 'Foto ' + (i + 1));
+                d.addEventListener('click', e => { e.stopPropagation(); goTo(i); resetAuto(); });
+                dotsWrap.appendChild(d);
+            });
+
+            const dots = Array.from(dotsWrap.querySelectorAll('.mountain-carousel__dot'));
+
+            function goTo(idx) {
+                imgs[current].classList.remove('active');
+                dots[current].classList.remove('active');
+                current = (idx + imgs.length) % imgs.length;
+                imgs[current].classList.add('active');
+                dots[current].classList.add('active');
+            }
+
+            function resetAuto() {
+                clearInterval(autoTimer);
+                autoTimer = setInterval(() => goTo(current + 1), 4000);
+            }
+
+            carousel.querySelector('.mountain-carousel__btn--prev').addEventListener('click', e => {
+                e.stopPropagation(); goTo(current - 1); resetAuto();
+            });
+            carousel.querySelector('.mountain-carousel__btn--next').addEventListener('click', e => {
+                e.stopPropagation(); goTo(current + 1); resetAuto();
+            });
+
+            resetAuto();
+
+            // Open lightbox on click
+            carousel.addEventListener('click', () => {
+                lightboxImg.src = imgs[current].src;
+                lightboxImg.alt = imgs[current].alt;
+                lightbox.classList.add('open');
+            });
+
+            // Lightbox navigation
+            document.getElementById('lightboxPrev').addEventListener('click', () => {
+                goTo(current - 1);
+                lightboxImg.src = imgs[current].src;
+                lightboxImg.alt = imgs[current].alt;
+            });
+            document.getElementById('lightboxNext').addEventListener('click', () => {
+                goTo(current + 1);
+                lightboxImg.src = imgs[current].src;
+                lightboxImg.alt = imgs[current].alt;
+            });
+
+            // Close lightbox
+            function closeLightbox() { lightbox.classList.remove('open'); }
+            document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+            lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+            document.addEventListener('keydown', e => {
+                if (!lightbox.classList.contains('open')) return;
+                if (e.key === 'Escape') { closeLightbox(); }
+                if (e.key === 'ArrowLeft')  { goTo(current - 1); lightboxImg.src = imgs[current].src; }
+                if (e.key === 'ArrowRight') { goTo(current + 1); lightboxImg.src = imgs[current].src; }
+            });
+        })();
 
         // ========================================
         // PROJECT FILTERS
