@@ -952,6 +952,41 @@ ul, ol {
     color: var(--accent);
 }
 
+.mountain-teaser {
+    padding: 16px 32px 0;
+}
+
+.mountain-teaser__title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.mountain-teaser__subtitle {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    font-style: italic;
+    margin-bottom: 12px;
+}
+
+.mountain-teaser__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 16px;
+}
+
+.mountain-teaser__tags span {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+    padding: 3px 8px;
+    border-radius: 2px;
+}
+
 .music-bio {
     max-height: 0;
     overflow: hidden;
