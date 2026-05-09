@@ -826,6 +826,15 @@ ul, ol {
 .passion-card--montagna {
     padding: 0;
     overflow: hidden;
+    position: relative;
+    z-index: 1;
+    transition: z-index 0s 0.4s;
+}
+
+.passion-card--montagna.zoomed {
+    overflow: visible;
+    z-index: 20;
+    transition: z-index 0s 0s;
 }
 
 .passion-card--montagna .passion-card__icon,
@@ -842,9 +851,18 @@ ul, ol {
 .mountain-carousel {
     position: relative;
     width: 100%;
-    height: 230px;
+    height: 300px;
     overflow: hidden;
-    cursor: pointer;
+    cursor: zoom-in;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow 0.4s ease;
+    transform-origin: center top;
+}
+
+.mountain-carousel.zoomed {
+    transform: scale(1.13);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35);
+    cursor: zoom-out;
 }
 
 .mountain-carousel__img {
@@ -905,62 +923,6 @@ ul, ol {
 }
 
 .mountain-carousel__dot.active { background: var(--accent); }
-
-/* ========================================
-   LIGHTBOX
-======================================== */
-.lightbox {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.93);
-    z-index: 2000;
-    align-items: center;
-    justify-content: center;
-}
-
-.lightbox.open { display: flex; }
-
-.lightbox__img {
-    max-width: 90vw;
-    max-height: 86vh;
-    object-fit: contain;
-    display: block;
-}
-
-.lightbox__close {
-    position: absolute;
-    top: 18px;
-    right: 22px;
-    color: #fff;
-    font-size: 1.6rem;
-    background: none;
-    border: none;
-    cursor: pointer;
-    line-height: 1;
-    opacity: 0.75;
-    transition: opacity 0.2s;
-}
-
-.lightbox__close:hover { opacity: 1; }
-
-.lightbox__nav {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #fff;
-    font-size: 2.8rem;
-    background: rgba(0, 0, 0, 0.35);
-    border: none;
-    padding: 6px 16px;
-    cursor: pointer;
-    line-height: 1;
-    transition: background 0.2s;
-}
-
-.lightbox__nav:hover { background: rgba(0, 0, 0, 0.65); }
-.lightbox__nav--prev { left: 12px; }
-.lightbox__nav--next { right: 12px; }
 
 /* ========================================
    CONTACT SECTION
