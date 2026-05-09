@@ -27,7 +27,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="style.css?v=7">
+    <link rel="stylesheet" href="style.css?v=8">
 
     <!-- p5.js per effetto grafico -->
     <script src="p5.min.js"></script>
@@ -683,21 +683,32 @@
                         <button class="mountain-carousel__btn mountain-carousel__btn--next" aria-label="Successivo">&#8250;</button>
                         <div class="music-carousel__dots" id="musicDots"></div>
                     </div>
-                    <div class="passion-card__icon">🎵</div>
-                    <h3 class="passion-card__title">Il mio viaggio musicale</h3>
+                    <div class="passion-card__icon">🎧</div>
+                    <h3 class="passion-card__title">Storytelling Musicale</h3>
                     <p class="passion-card__text">
-                        Questa playlist non è solo musica, è la mia biografia sonora.
-                        Ogni brano rappresenta un'epoca e una scoperta.
+                        Non una semplice raccolta, ma il mio percorso di evoluzione musicale e umana.
+                        Ogni brano è una tappa, una scoperta, un cambiamento di prospettiva.
                     </p>
                     <ul class="passion-card__list">
-                        <li><strong>Le Radici</strong> — Francesco Guccini</li>
-                        <li><strong>La Lotta</strong> — Bob Dylan, Hurricane</li>
-                        <li><strong>L'Evoluzione</strong> — Jethro Tull</li>
-                        <li><strong>L'Oscurità</strong> — The Cure</li>
-                        <li><strong>La Generazione</strong> — Radiohead &amp; Placebo</li>
-                        <li><strong>Il Presente</strong> — Fontaines D.C.</li>
+                        <li><strong>Le Radici</strong> — Guccini, <em>Piccola storia ignobile</em></li>
+                        <li><strong>La Lotta</strong> — Bob Dylan, <em>Hurricane</em></li>
+                        <li><strong>L'Evoluzione</strong> — Jethro Tull, <em>Aqualung</em></li>
+                        <li><strong>L'Oscurità</strong> — The Cure, <em>A Forest</em></li>
+                        <li><strong>L'Urlo</strong> — Radiohead, <em>Creep</em></li>
+                        <li><strong>L'Identità Digitale</strong> — Placebo, <em>Too Many Friends</em></li>
+                        <li><strong>Il Presente</strong> — Fontaines D.C., <em>Starburster</em></li>
                     </ul>
-                    <p class="passion-card__cta">Clicca sulla cover per ascoltare su YouTube.</p>
+                    <div class="music-bio" id="musicBio">
+                        <p><strong>LE RADICI (Il Sociale)</strong> — Dove tutto è iniziato. La scoperta della canzone d'autore come strumento di cronaca, sensibilità e denuncia sociale.</p>
+                        <p><strong>LA LOTTA (L'America)</strong> — Il grido di giustizia e la forza della narrazione americana: una ballata cinematografica che insegna il potere delle parole.</p>
+                        <p><strong>L'EVOLUZIONE (Il Rock)</strong> — L'incontro con il Progressive e le architetture rock più complesse, dove la tecnica incontra l'energia.</p>
+                        <p><strong>L'OSCURITÀ (L'Università)</strong> — Le atmosfere ipnotiche e post-punk degli anni universitari. La musica che diventa introspezione e ambiente.</p>
+                        <p><strong>L'URLO (La Generazione)</strong> — Il manifesto di un'epoca. La bellezza della vulnerabilità e del sentirsi fuori posto.</p>
+                        <p><strong>L'IDENTITÀ DIGITALE (La Riflessione)</strong> — Il paradosso moderno: migliaia di connessioni digitali e la ricerca di un contatto umano autentico.</p>
+                        <p><strong>IL PRESENTE (L'Oggi)</strong> — L'urgenza del rock contemporaneo. Il battito di oggi che chiude il cerchio, tornando a una poesia elettrica e vitale.</p>
+                    </div>
+                    <button class="music-bio__toggle" id="musicBioToggle">Leggi di più ↓</button>
+                    <p class="passion-card__cta">Clicca sulla cover e viaggia attraverso queste pillole musicali.</p>
                 </div>
 
                 <div class="passion-card">
@@ -910,13 +921,13 @@
         // ========================================
         (function () {
             const tracks = [
-                { id: 'CqFyZ1wC148', epoch: 'Le Radici',      artist: 'Francesco Guccini' },
-                { id: 'bpZvg_FjL3Q', epoch: 'La Lotta',       artist: 'Bob Dylan' },
-                { id: 'N4zPu3ISCGs', epoch: "L'Evoluzione",   artist: 'Jethro Tull' },
-                { id: 'qh-jVXyn5CM', epoch: "L'Oscurità",     artist: 'The Cure' },
-                { id: 'XFkzRNyygfk', epoch: 'La Generazione', artist: 'Radiohead' },
-                { id: 'p21YfobjaVA', epoch: 'La Generazione', artist: 'Placebo' },
-                { id: 'OMaycNcPsHI', epoch: 'Il Presente',    artist: 'Fontaines D.C.' },
+                { id: 'CqFyZ1wC148', epoch: 'Le Radici',           artist: 'Francesco Guccini' },
+                { id: 'bpZvg_FjL3Q', epoch: 'La Lotta',            artist: 'Bob Dylan' },
+                { id: 'N4zPu3ISCGs', epoch: "L'Evoluzione",        artist: 'Jethro Tull' },
+                { id: 'qh-jVXyn5CM', epoch: "L'Oscurità",          artist: 'The Cure' },
+                { id: 'XFkzRNyygfk', epoch: "L'Urlo",              artist: 'Radiohead' },
+                { id: 'p21YfobjaVA', epoch: "L'Identità Digitale", artist: 'Placebo' },
+                { id: 'OMaycNcPsHI', epoch: 'Il Presente',         artist: 'Fontaines D.C.' },
             ];
 
             const mc       = document.getElementById('musicCarousel');
@@ -959,6 +970,14 @@
 
             mc.addEventListener('click', () => {
                 window.open('https://www.youtube.com/watch?v=' + tracks[current].id + '&list=PLf4g5YwwUXK11ziqKY5Shs3PIEkt-rfag', '_blank', 'noopener noreferrer');
+            });
+
+            // Leggi di più toggle
+            const bioToggle = document.getElementById('musicBioToggle');
+            const bio = document.getElementById('musicBio');
+            bioToggle.addEventListener('click', () => {
+                const isOpen = bio.classList.toggle('open');
+                bioToggle.textContent = isOpen ? 'Mostra meno ↑' : 'Leggi di più ↓';
             });
         })();
 

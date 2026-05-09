@@ -952,6 +952,37 @@ ul, ol {
     color: var(--accent);
 }
 
+.music-bio {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+    padding: 0 32px;
+}
+
+.music-bio.open { max-height: 900px; }
+
+.music-bio p {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 10px;
+    padding-top: 4px;
+}
+
+.music-bio p:first-child { margin-top: 16px; }
+
+.music-bio__toggle {
+    display: block;
+    margin: 4px 32px 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.8rem;
+    color: var(--accent);
+    padding: 0;
+    font-family: inherit;
+}
+
 .music-carousel {
     position: relative;
     width: 100%;
