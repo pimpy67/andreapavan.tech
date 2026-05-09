@@ -845,8 +845,8 @@
         const isMobile = window.innerWidth <= 768;
         const observerOptions = {
             root: null,
-            rootMargin: isMobile ? '0px' : '-20% 0px -20% 0px',
-            threshold: isMobile ? 0 : 0.1
+            rootMargin: '0px',
+            threshold: 0
         };
 
         const observer = new IntersectionObserver((entries) => {
