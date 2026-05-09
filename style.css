@@ -941,7 +941,16 @@ ul, ol {
 }
 
 .passion-card--musica .passion-card__icon { margin-top: 24px; }
-.passion-card--musica .passion-card__list  { margin-bottom: 32px; }
+.passion-card--musica .passion-card__list  { margin-bottom: 16px; }
+.passion-card--musica .passion-card__cta  { margin-bottom: 32px; }
+
+.passion-card__cta {
+    padding-left: 32px;
+    padding-right: 32px;
+    font-size: 0.8rem;
+    font-style: italic;
+    color: var(--accent);
+}
 
 .music-video {
     position: relative;
