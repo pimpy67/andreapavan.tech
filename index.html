@@ -649,15 +649,17 @@
 
                 <div class="passion-card passion-card--letture">
                     <div class="book-carousel" id="bookCarousel">
-                        <img alt="I Fiori del Male" class="music-carousel__img active">
-                        <img alt="L'Opera da tre soldi" class="music-carousel__img">
-                        <img alt="L'insostenibile leggerezza dell'essere" class="music-carousel__img">
-                        <img alt="Cent'anni di solitudine" class="music-carousel__img">
-                        <img alt="Uomini e topi" class="music-carousel__img">
-                        <img alt="Novecento" class="music-carousel__img">
+                        <img src="img/libro_i_fiori_del_male.jpg" alt="I Fiori del Male" class="music-carousel__img active">
+                        <img src="img/libro_centanni_di-solitudine.webp" alt="Cent'anni di solitudine" class="music-carousel__img">
+                        <img src="img/libro_uomini_e_topi.jpg" alt="Uomini e topi" class="music-carousel__img">
+                        <img src="img/libro_novecento.jpg" alt="Novecento" class="music-carousel__img">
+                        <img src="img/libro_la_fattoria_degli_animali.jpg" alt="La fattoria degli animali" class="music-carousel__img">
+                        <img src="img/libro_ragazzi_di_vita.jpg" alt="Ragazzi di vita" class="music-carousel__img">
+                        <img src="img/libro_seta.jpg" alt="Seta" class="music-carousel__img">
                         <div class="music-carousel__label">
                             <span class="music-carousel__epoch" id="bookTitle">I Fiori del Male</span>
                             <span class="music-carousel__artist" id="bookAuthor">Charles Baudelaire</span>
+                            <span class="music-carousel__quote" id="bookQuote">«Ho più ricordi di mille anni vissuti.»</span>
                         </div>
                         <button class="mountain-carousel__btn mountain-carousel__btn--prev" aria-label="Precedente">&#8249;</button>
                         <button class="mountain-carousel__btn mountain-carousel__btn--next" aria-label="Successivo">&#8250;</button>
@@ -670,19 +672,27 @@
                     </p>
                 </div>
 
-                <div class="passion-card">
+                <div class="passion-card passion-card--volontariato">
+                    <div class="vol-carousel" id="volCarousel">
+                        <img src="img/volontariato_albania.jpg" alt="ADP Albania" class="music-carousel__img active">
+                        <img src="img/volontariato_gep.jpg" alt="GEP Escursionistico" class="music-carousel__img">
+                        <img src="https://img.youtube.com/vi/a4_KmQwhIEY/hqdefault.jpg" alt="VIS Argentina" class="music-carousel__img">
+                        <img src="img/volontariato_fundacion-mas.jpg" alt="Fundación MAS" class="music-carousel__img">
+                        <img src="img/effata-preview.jpg" alt="Effatà" class="music-carousel__img">
+                        <div class="music-carousel__label">
+                            <span class="music-carousel__epoch" id="volOrg">ADP Albania</span>
+                            <span class="music-carousel__artist" id="volRole">Progetto educativo · Albania</span>
+                        </div>
+                        <a class="vol-carousel__link" id="volLink" href="#" target="_blank" rel="noopener noreferrer" aria-label="Visita sito">↗</a>
+                        <button class="mountain-carousel__btn mountain-carousel__btn--prev" aria-label="Precedente">&#8249;</button>
+                        <button class="mountain-carousel__btn mountain-carousel__btn--next" aria-label="Successivo">&#8250;</button>
+                        <div class="music-carousel__dots" id="volDots"></div>
+                    </div>
                     <div class="passion-card__icon">🤝</div>
                     <h3 class="passion-card__title">Volontariato</h3>
                     <p class="passion-card__text">
-                        Restituire alla comunità è importante. 
-                        Il volontariato mi tiene con i piedi per terra 
-                        e mi ricorda cosa conta davvero.
+                        Dal Mediterraneo all'Argentina. Esperienze che mi hanno cambiato.
                     </p>
-                    <ul class="passion-card__list">
-                        <li>Associazione locale</li>
-                        <li>Eventi community</li>
-                        <li>Mentoring</li>
-                    </ul>
                 </div>
             </div>
         </section>
@@ -877,7 +887,7 @@
         const syncListeners = [];
         function resetSyncTimer() {
             clearInterval(syncTimer);
-            syncTimer = setInterval(() => syncListeners.forEach(fn => fn()), 4500);
+            syncTimer = setInterval(() => syncListeners.forEach(fn => fn()), 5500);
         }
 
         // ========================================
@@ -1018,12 +1028,13 @@
         // ========================================
         (function () {
             const books = [
-                { query: 'Les Fleurs du Mal Baudelaire',              title: 'I Fiori del Male',                       author: 'Charles Baudelaire' },
-                { query: 'Die Dreigroschenoper Brecht',               title: "L'Opera da tre soldi",                   author: 'Bertolt Brecht' },
-                { query: 'Unbearable Lightness of Being Kundera',     title: "L'insostenibile leggerezza dell'essere", author: 'Milan Kundera' },
-                { query: 'Cien años de soledad García Márquez',       title: "Cent'anni di solitudine",                author: 'Gabriel García Márquez' },
-                { query: 'Uomini e topi Steinbeck',                   title: 'Uomini e topi',                          author: 'John Steinbeck' },
-                { query: 'Novecento Baricco',                         title: 'Novecento',                              author: 'Alessandro Baricco' },
+                { title: 'I Fiori del Male',          author: 'Charles Baudelaire',     quote: '«Ho più ricordi di mille anni vissuti.»' },
+                { title: "Cent'anni di solitudine",   author: 'Gabriel García Márquez', quote: '«La vita non è quella che si è vissuta, ma quella che si ricorda.»' },
+                { title: 'Uomini e topi',             author: 'John Steinbeck',         quote: '«I migliori piani di uomini e topi vanno spesso storto.»' },
+                { title: 'Novecento',                 author: 'Alessandro Baricco',     quote: '«Dal mare non c\'è via di scampo.»' },
+                { title: 'La fattoria degli animali', author: 'George Orwell',          quote: '«Tutti gli animali sono uguali, ma alcuni sono più uguali degli altri.»' },
+                { title: 'Ragazzi di vita',           author: 'Pier Paolo Pasolini',    quote: '«Erano ragazzi di vita: vivere era il loro mestiere.»' },
+                { title: 'Seta',                      author: 'Alessandro Baricco',     quote: '«C\'era una volta un uomo che, ogni anno, si metteva in viaggio.»' },
             ];
 
             const bc       = document.getElementById('bookCarousel');
@@ -1031,19 +1042,8 @@
             const dotsWrap = document.getElementById('bookDots');
             const titleEl  = document.getElementById('bookTitle');
             const authorEl = document.getElementById('bookAuthor');
+            const quoteEl  = document.getElementById('bookQuote');
             let current = 0;
-
-            // Fetch covers dynamically from Open Library
-            books.forEach((book, i) => {
-                const q = encodeURIComponent(book.query);
-                fetch('https://openlibrary.org/search.json?q=' + q + '&limit=1&fields=cover_i')
-                    .then(r => r.json())
-                    .then(data => {
-                        const coverId = data.docs?.[0]?.cover_i;
-                        if (coverId) imgs[i].src = 'https://covers.openlibrary.org/b/id/' + coverId + '-L.jpg';
-                    })
-                    .catch(() => {});
-            });
 
             books.forEach((_, i) => {
                 const d = document.createElement('button');
@@ -1063,12 +1063,60 @@
                 dots[current].classList.add('active');
                 titleEl.textContent  = books[current].title;
                 authorEl.textContent = books[current].author;
+                quoteEl.textContent  = books[current].quote;
             }
 
             syncListeners.push(() => goTo(current + 1));
 
             bc.querySelector('.mountain-carousel__btn--prev').addEventListener('click', e => { e.stopPropagation(); goTo(current - 1); resetSyncTimer(); });
             bc.querySelector('.mountain-carousel__btn--next').addEventListener('click', e => { e.stopPropagation(); goTo(current + 1); resetSyncTimer(); });
+        })();
+
+        // ========================================
+        // VOL CAROUSEL
+        // ========================================
+        (function () {
+            const experiences = [
+                { org: 'ADP Albania',        role: 'Progetto educativo · Albania',    link: 'https://www.amicideipopoli.org/' },
+                { org: 'GEP Escursionismo',  role: 'Gruppo escursionistico · Veneto', link: 'https://www.facebook.com/GePorcellengo/' },
+                { org: 'VIS – Argentina',    role: 'ONG Volontariato · Buenos Aires', link: 'https://youtu.be/a4_KmQwhIEY' },
+                { org: 'Fundación MAS',      role: 'Escuela de Fútbol · Argentina',   link: 'https://www.facebook.com/fundacion.mas/' },
+                { org: 'Effatà',             role: 'Associazione · Venezia',          link: 'https://www.facebook.com/profile.php?id=61576427205615' },
+            ];
+
+            const vc       = document.getElementById('volCarousel');
+            const imgs     = Array.from(vc.querySelectorAll('.music-carousel__img'));
+            const dotsWrap = document.getElementById('volDots');
+            const orgEl    = document.getElementById('volOrg');
+            const roleEl   = document.getElementById('volRole');
+            const linkEl   = document.getElementById('volLink');
+            let current = 0;
+
+            experiences.forEach((_, i) => {
+                const d = document.createElement('button');
+                d.className = 'mountain-carousel__dot' + (i === 0 ? ' active' : '');
+                d.setAttribute('aria-label', 'Esperienza ' + (i + 1));
+                d.addEventListener('click', e => { e.stopPropagation(); goTo(i); resetSyncTimer(); });
+                dotsWrap.appendChild(d);
+            });
+
+            const dots = Array.from(dotsWrap.querySelectorAll('.mountain-carousel__dot'));
+
+            function goTo(idx) {
+                imgs[current].classList.remove('active');
+                dots[current].classList.remove('active');
+                current = (idx + experiences.length) % experiences.length;
+                imgs[current].classList.add('active');
+                dots[current].classList.add('active');
+                orgEl.textContent  = experiences[current].org;
+                roleEl.textContent = experiences[current].role;
+                linkEl.href        = experiences[current].link;
+            }
+
+            syncListeners.push(() => goTo(current + 1));
+
+            vc.querySelector('.mountain-carousel__btn--prev').addEventListener('click', e => { e.stopPropagation(); goTo(current - 1); resetSyncTimer(); });
+            vc.querySelector('.mountain-carousel__btn--next').addEventListener('click', e => { e.stopPropagation(); goTo(current + 1); resetSyncTimer(); });
         })();
 
         resetSyncTimer();

@@ -927,9 +927,59 @@ ul, ol {
 /* ========================================
    MUSIC CARD
 ======================================== */
-.passion-card--musica {
+.passion-card--musica,
+.passion-card--letture,
+.passion-card--volontariato {
     padding: 0;
     overflow: hidden;
+}
+
+.passion-card--letture .passion-card__icon,
+.passion-card--letture .passion-card__title,
+.passion-card--letture .passion-card__text,
+.passion-card--volontariato .passion-card__icon,
+.passion-card--volontariato .passion-card__title,
+.passion-card--volontariato .passion-card__text {
+    padding-left: 32px;
+    padding-right: 32px;
+}
+
+.passion-card--letture .passion-card__icon,
+.passion-card--volontariato .passion-card__icon { margin-top: 24px; }
+
+.passion-card--letture .passion-card__text,
+.passion-card--volontariato .passion-card__text  { padding-bottom: 32px; }
+
+.vol-carousel {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    cursor: default;
+}
+
+.vol-carousel__link {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 3;
+    background: rgba(0, 0, 0, 0.55);
+    color: var(--accent);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-decoration: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(181, 245, 59, 0.35);
+    transition: background 0.2s;
+}
+
+.vol-carousel__link:hover {
+    background: rgba(181, 245, 59, 0.18);
 }
 
 .passion-card--musica .passion-card__icon,
@@ -1087,6 +1137,14 @@ ul, ol {
     font-size: 0.95rem;
     font-weight: 600;
     color: #fff;
+}
+
+.music-carousel__quote {
+    font-size: 0.72rem;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 1.45;
+    margin-top: 2px;
 }
 
 .music-carousel__dots {
