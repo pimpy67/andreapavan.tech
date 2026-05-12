@@ -1323,3 +1323,98 @@ ul, ol {
     0%, 100% { opacity: 0.3; }
     50% { opacity: 1; }
 }
+
+/* ========================================
+   LIGHTBOX
+======================================== */
+.lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.92);
+    overflow-y: auto;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+}
+
+.lightbox.open {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.lightbox__inner {
+    position: relative;
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 56px 16px 24px;
+    box-sizing: border-box;
+}
+
+.lightbox__img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.lightbox__caption {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: rgba(255,255,255,0.5);
+}
+
+.lightbox__close {
+    position: fixed;
+    top: 20px;
+    right: 24px;
+    background: none;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.7);
+    width: 36px;
+    height: 36px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-fast);
+    line-height: 1;
+}
+
+.lightbox__close:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+/* Overlay zoom icon on Figma preview cards */
+.project-card__preview--clickable {
+    cursor: zoom-in;
+}
+
+.project-card__preview--clickable::after {
+    content: '⤢';
+    position: absolute;
+    bottom: 8px;
+    right: 10px;
+    font-size: 1rem;
+    color: rgba(255,255,255,0.85);
+    background: rgba(0,0,0,0.45);
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s;
+    pointer-events: none;
+}
+
+.project-card:hover .project-card__preview--clickable::after {
+    opacity: 1;
+}
