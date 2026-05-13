@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Andrea Pavan | Junior Web Developer</title>
-    <meta name="description" content="Junior Web Developer - Il mio percorso formativo e i miei progetti">
+    <title>Andrea Pavan | Web Developer</title>
+    <meta name="description" content="Web Developer - Il mio percorso formativo e i miei progetti">
 
     <!-- Open Graph / Facebook / WhatsApp -->
     <meta property="og:type"             content="website">
@@ -649,7 +649,6 @@
 
                 <div class="passion-card passion-card--letture">
                     <div class="book-carousel" id="bookCarousel">
-                        <div class="book-blur-bg" id="bookBlurBg"></div>
                         <img src="img/libro_i_fiori_del_male.jpg" alt="I Fiori del Male" class="music-carousel__img active">
                         <img src="img/libro_centanni_di-solitudine.webp" alt="Cent'anni di solitudine" class="music-carousel__img">
                         <img src="img/libro_uomini_e_topi.jpg" alt="Uomini e topi" class="music-carousel__img">
@@ -1040,14 +1039,11 @@
 
             const bc       = document.getElementById('bookCarousel');
             const imgs     = Array.from(bc.querySelectorAll('.music-carousel__img'));
-            const blurBg   = document.getElementById('bookBlurBg');
             const dotsWrap = document.getElementById('bookDots');
             const titleEl  = document.getElementById('bookTitle');
             const authorEl = document.getElementById('bookAuthor');
             const quoteEl  = document.getElementById('bookQuote');
             let current = 0;
-
-            blurBg.style.backgroundImage = `url('${imgs[0].src}')`;
 
             books.forEach((_, i) => {
                 const d = document.createElement('button');
@@ -1065,7 +1061,6 @@
                 current = (idx + books.length) % books.length;
                 imgs[current].classList.add('active');
                 dots[current].classList.add('active');
-                blurBg.style.backgroundImage = `url('${imgs[current].src}')`;
                 titleEl.textContent  = books[current].title;
                 authorEl.textContent = books[current].author;
                 quoteEl.textContent  = books[current].quote;
