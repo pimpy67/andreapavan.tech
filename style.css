@@ -1227,6 +1227,22 @@ ul, ol {
     height: 220px;
     overflow: hidden;
     background: #141414;
+    cursor: zoom-in;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow 0.4s ease;
+    transform-origin: center top;
+}
+
+.book-carousel.zoomed {
+    transform: scale(1.13);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35);
+    cursor: zoom-out;
+}
+
+.passion-card--letture.zoomed {
+    overflow: visible;
+    z-index: 20;
+    transition: z-index 0s 0s;
 }
 
 .book-blur-bg {

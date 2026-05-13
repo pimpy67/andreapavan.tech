@@ -1069,6 +1069,26 @@
 
             bc.querySelector('.mountain-carousel__btn--prev').addEventListener('click', e => { e.stopPropagation(); goTo(current - 1); resetSyncTimer(); });
             bc.querySelector('.mountain-carousel__btn--next').addEventListener('click', e => { e.stopPropagation(); goTo(current + 1); resetSyncTimer(); });
+
+            const bookCard = bc.closest('.passion-card--letture');
+            function bookCollapse() {
+                bc.classList.remove('zoomed');
+                bookCard.classList.remove('zoomed');
+                document.removeEventListener('click', bookOutsideClick);
+                document.removeEventListener('keydown', bookEscHandler);
+            }
+            function bookOutsideClick(e) { if (!bc.contains(e.target)) bookCollapse(); }
+            function bookEscHandler(e) { if (e.key === 'Escape') bookCollapse(); }
+            bc.addEventListener('click', () => {
+                if (bc.classList.contains('zoomed')) {
+                    bookCollapse();
+                } else {
+                    bc.classList.add('zoomed');
+                    bookCard.classList.add('zoomed');
+                    document.addEventListener('click', bookOutsideClick);
+                    document.addEventListener('keydown', bookEscHandler);
+                }
+            });
         })();
 
         // ========================================
