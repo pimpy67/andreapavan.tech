@@ -1444,6 +1444,11 @@ ul, ol {
         grid-template-columns: 1fr;
     }
 
+    .project-card[data-category="siti"],
+    .project-card[data-category="webapp"] {
+        grid-column: span 1;
+    }
+
     .hero__name {
         font-size: clamp(2.5rem, 12vw, 4rem);
     }
