@@ -801,7 +801,7 @@ ul, ol {
 .passions__grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 32px;
+    gap: 50px;
 }
 
 .passion-card {
