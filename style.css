@@ -842,6 +842,14 @@ ul, ol {
     display: none;
 }
 
+.passion-more--hidden { display: none; }
+
+.music-bio--inline {
+    max-height: none;
+    overflow: visible;
+    padding: 0;
+}
+
 .passion-read-more {
     background: none;
     border: none;
