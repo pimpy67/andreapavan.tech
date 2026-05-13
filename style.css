@@ -1436,6 +1436,10 @@ ul, ol {
         font-size: 0.6rem;
     }
 
+    .theme-btn__label {
+        display: none;
+    }
+
     .about__stats {
         grid-template-columns: 1fr;
         gap: 24px;
