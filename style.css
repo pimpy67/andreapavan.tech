@@ -930,7 +930,6 @@ ul, ol {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: top;
     opacity: 0;
     transition: opacity 0.5s ease;
     pointer-events: none;
