@@ -819,7 +819,7 @@
         // ========================================
         function setTheme(theme) {
             document.documentElement.setAttribute('data-theme', theme);
-            localStorage.setItem('theme', theme);
+            localStorage.setItem('ap-theme', theme);
             
             document.querySelectorAll('.theme-btn').forEach(btn => {
                 btn.classList.remove('active');
@@ -830,7 +830,7 @@
         }
 
         // Load saved theme
-        const savedTheme = localStorage.getItem('theme') || 'dark';
+        const savedTheme = localStorage.getItem('ap-theme') || 'dark';
         setTheme(savedTheme);
 
         // ========================================
