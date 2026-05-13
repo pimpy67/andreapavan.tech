@@ -1332,6 +1332,17 @@ ul, ol {
     transform: translateX(0);
 }
 
+.contact-link--copy {
+    background: none;
+    border: none;
+    border-bottom: 1px solid var(--border);
+    color: inherit;
+    font-family: inherit;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+}
+
 /* ========================================
    FOOTER
 ======================================== */

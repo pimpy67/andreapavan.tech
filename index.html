@@ -27,7 +27,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="style.css?v=21">
+    <link rel="stylesheet" href="style.css?v=22">
 
     <!-- p5.js per effetto grafico -->
     <script src="p5.min.js"></script>
@@ -767,14 +767,14 @@
                     Instagram
                     <span class="contact-link__arrow">→</span>
                 </a>
-                <a href="mailto:andreapavan67@gmail.com" class="contact-link">
+                <button class="contact-link contact-link--copy" id="copyEmailBtn" data-email="andreapavan67@gmail.com">
                     <svg class="contact-link__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
                         <polyline points="22,6 12,13 2,6"/>
                     </svg>
-                    Email
-                    <span class="contact-link__arrow">→</span>
-                </a>
+                    andreapavan67@gmail.com
+                    <span class="contact-link__arrow" id="copyEmailArrow">copia →</span>
+                </button>
             </div>
         </section>
 
@@ -1186,6 +1186,17 @@
                 });
             });
         });
+
+        const copyBtn = document.getElementById('copyEmailBtn');
+        if (copyBtn) {
+            copyBtn.addEventListener('click', () => {
+                navigator.clipboard.writeText(copyBtn.dataset.email).then(() => {
+                    const arrow = document.getElementById('copyEmailArrow');
+                    arrow.textContent = 'copiata ✓';
+                    setTimeout(() => { arrow.textContent = 'copia →'; }, 2000);
+                });
+            });
+        }
 
         document.querySelectorAll('.passion-read-more').forEach(btn => {
             btn.addEventListener('click', function() {
