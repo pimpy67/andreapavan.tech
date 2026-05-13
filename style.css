@@ -1167,19 +1167,29 @@ ul, ol {
     background: #141414;
 }
 
+.book-blur-bg {
+    position: absolute;
+    inset: -20px;
+    background-size: cover;
+    background-position: center;
+    filter: blur(24px) brightness(0.3);
+    z-index: 0;
+}
+
 .book-carousel .music-carousel__img {
-    inset: 0 0 0 auto;
+    inset: 0 auto 0 0;
     width: 50%;
     height: 100%;
     object-fit: contain;
     object-position: center;
+    padding: 8px 0 8px 14px;
+    box-sizing: border-box;
     z-index: 1;
-    background: #141414;
 }
 
 .book-carousel .music-carousel__label {
-    left: 0;
-    right: 50%;
+    left: 50%;
+    right: 0;
     top: 0;
     bottom: 0;
     background: none;
@@ -1205,11 +1215,11 @@ ul, ol {
     color: var(--accent);
 }
 
-.book-carousel .mountain-carousel__btn--prev { left: 20px; right: auto; }
-.book-carousel .mountain-carousel__btn--next { left: 62px; right: auto; }
+.book-carousel .mountain-carousel__btn--prev { left: calc(50% + 16px); right: auto; }
+.book-carousel .mountain-carousel__btn--next { left: calc(50% + 58px); right: auto; }
 
 .book-carousel .music-carousel__dots {
-    left: 108px;
+    left: calc(50% + 104px);
     right: auto;
     bottom: 22px;
     transform: none;
