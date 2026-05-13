@@ -613,6 +613,18 @@ ul, ol {
     height: 14px;
 }
 
+.project-card__links .project-link:first-child::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+.project-card__links .project-link:not(:first-child) {
+    position: relative;
+    z-index: 2;
+}
+
 /* ========================================
    LEARNING PATH SECTION
 ======================================== */
