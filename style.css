@@ -1458,6 +1458,10 @@ ul, ol {
         font-size: clamp(2.5rem, 12vw, 4rem);
     }
 
+    .hero__title {
+        font-size: 1rem;
+    }
+
     .path__toggle {
         display: grid;
         grid-template-columns: auto 1fr auto;
