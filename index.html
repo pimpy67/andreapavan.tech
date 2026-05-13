@@ -27,7 +27,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="style.css?v=18">
+    <link rel="stylesheet" href="style.css?v=19">
 
     <!-- p5.js per effetto grafico -->
     <script src="p5.min.js"></script>
@@ -587,7 +587,8 @@
                         Ogni vetta raggiunta è una metafora del coding:
                         un passo alla volta, senza fretta.
                     </p>
-                    <ul class="passion-card__list">
+                    <button class="passion-read-more">Leggi di più ↓</button>
+                    <ul class="passion-card__list passion-card__list--hidden">
                         <li>Dolomiti &amp; Ferrate — Dove la logica si fa roccia</li>
                         <li>Trekking — La meditazione in movimento</li>
                         <li>Fotografia Outdoor — Quando la fatica diventa bellezza</li>
@@ -636,7 +637,8 @@
                         Non una semplice raccolta, ma il mio percorso di evoluzione musicale e umana.
                         Ogni brano è una tappa, una scoperta, un cambiamento di prospettiva.
                     </p>
-                    <ul class="passion-card__list">
+                    <button class="passion-read-more">Leggi di più ↓</button>
+                    <ul class="passion-card__list passion-card__list--hidden">
                         <li><strong>Le Radici</strong> — Guccini, <em>Piccola storia ignobile</em></li>
                         <li><strong>La Lotta</strong> — Bob Dylan, <em>Hurricane</em></li>
                         <li><strong>L'Evoluzione</strong> — Jethro Tull, <em>Aqualung</em></li>
@@ -1201,6 +1203,15 @@
                         card.style.display = 'none';
                     }
                 });
+            });
+        });
+
+        document.querySelectorAll('.passion-read-more').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const list = this.nextElementSibling;
+                const expanded = !list.classList.contains('passion-card__list--hidden');
+                list.classList.toggle('passion-card__list--hidden', expanded);
+                this.textContent = expanded ? 'Leggi di più ↓' : 'Leggi di meno ↑';
             });
         });
     </script>

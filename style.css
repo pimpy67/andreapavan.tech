@@ -475,7 +475,7 @@ ul, ol {
 .projects__grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 40px;
+    gap: 50px;
 }
 
 .project-card[data-category="siti"],
@@ -670,10 +670,16 @@ ul, ol {
 
 .path__item {
     border-bottom: 1px solid var(--border);
+    border-radius: 4px;
+    transition: background var(--transition-fast);
 }
 
 .path__item:first-child {
     border-top: 1px solid var(--border);
+}
+
+.path__item:hover {
+    background: rgba(255, 255, 255, 0.03);
 }
 
 .path__toggle {
@@ -681,7 +687,7 @@ ul, ol {
     align-items: center;
     gap: 20px;
     width: 100%;
-    padding: 24px 0;
+    padding: 24px 8px;
     background: transparent;
     border: none;
     color: var(--text-primary);
@@ -831,6 +837,25 @@ ul, ol {
     padding-top: 16px;
     border-top: 1px solid var(--border);
 }
+
+.passion-card__list--hidden {
+    display: none;
+}
+
+.passion-read-more {
+    background: none;
+    border: none;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    padding: 8px 0 0;
+    transition: opacity var(--transition-fast);
+}
+
+.passion-read-more:hover { opacity: 0.7; }
 
 .passion-card__list li {
     font-size: 0.85rem;
