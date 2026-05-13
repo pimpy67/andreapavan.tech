@@ -1172,15 +1172,15 @@ ul, ol {
 
 .music-carousel__label {
     position: absolute;
-    bottom: 28px;
-    left: 0;
-    right: 0;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.88) 40%);
-    padding: 48px 16px 14px;
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+    background: none;
+    padding: 0;
     z-index: 2;
     display: flex;
     flex-direction: column;
-    gap: 3px;
+    gap: 4px;
     pointer-events: none;
 }
 
@@ -1200,6 +1200,10 @@ ul, ol {
     font-size: 0.95rem;
     font-weight: 600;
     color: #fff;
+    background: rgba(0,0,0,0.55);
+    padding: 2px 7px;
+    border-radius: 3px;
+    align-self: flex-start;
     text-shadow: 0 1px 3px rgba(0,0,0,0.8);
 }
 
