@@ -1382,21 +1382,21 @@ ul, ol {
 
     .path__toggle {
         display: grid;
-        grid-template-columns: auto auto 1fr auto;
-        grid-template-rows: auto auto;
+        grid-template-columns: auto 1fr auto;
+        grid-template-rows: auto auto auto;
         column-gap: 12px;
-        row-gap: 4px;
+        row-gap: 2px;
         align-items: center;
     }
 
-    .path__toggle-icon  { grid-column: 1; grid-row: 1; }
-    .path__week         { grid-column: 2; grid-row: 1; }
-    .path__title        { grid-column: 3; grid-row: 1; }
-    .path__toggle-arrow { grid-column: 4; grid-row: 1; margin-left: 0; }
+    .path__toggle-icon  { grid-column: 1; grid-row: 1; align-self: center; }
+    .path__week         { grid-column: 2; grid-row: 1; align-self: center; }
+    .path__toggle-arrow { grid-column: 3; grid-row: 1; margin-left: 0; align-self: center; }
+    .path__title        { grid-column: 1 / -1; grid-row: 2; font-size: 1.15rem; }
 
     .path__content {
         grid-column: 1 / -1;
-        grid-row: 2;
+        grid-row: 3;
         text-align: left;
         padding-right: 0;
         flex: none;
