@@ -957,21 +957,6 @@
                 window.open('https://www.youtube.com/watch?v=' + tracks[current].id + '&list=PLf4g5YwwUXK11ziqKY5Shs3PIEkt-rfag', '_blank', 'noopener noreferrer');
             });
 
-            // Leggi di più toggle musica
-            const bioToggle = document.getElementById('musicBioToggle');
-            const bio = document.getElementById('musicBio');
-            bioToggle.addEventListener('click', () => {
-                const isOpen = bio.classList.toggle('open');
-                bioToggle.textContent = isOpen ? 'Mostra meno ↑' : 'Leggi di più ↓';
-            });
-
-            // Leggi di più toggle montagna
-            const mountainBioToggle = document.getElementById('mountainBioToggle');
-            const mountainBio = document.getElementById('mountainBio');
-            mountainBioToggle.addEventListener('click', () => {
-                const isOpen = mountainBio.classList.toggle('open');
-                mountainBioToggle.textContent = isOpen ? 'Mostra meno ↑' : 'Leggi di più ↓';
-            });
         })();
 
         // ========================================
