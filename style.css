@@ -1252,6 +1252,7 @@ ul, ol {
     background-position: center;
     filter: blur(24px) brightness(0.3);
     z-index: 0;
+    pointer-events: none;
 }
 
 .book-carousel .music-carousel__img {
