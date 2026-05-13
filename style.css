@@ -1169,7 +1169,7 @@ ul, ol {
 
 .book-carousel .music-carousel__img {
     inset: 0 0 0 auto;
-    width: 42%;
+    width: 50%;
     height: 100%;
     object-fit: contain;
     object-position: center;
@@ -1179,7 +1179,7 @@ ul, ol {
 
 .book-carousel .music-carousel__label {
     left: 0;
-    right: 42%;
+    right: 50%;
     top: 0;
     bottom: 0;
     background: none;
