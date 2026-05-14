@@ -21,9 +21,6 @@
     z-index: 1;
 }
 
-.main {
-    pointer-events: auto;
-}
 
 /* Overlay opaco sopra lo sketch per migliorare leggibilita */
 .section::before {
@@ -250,6 +247,7 @@ ul, ol {
    MAIN CONTENT
 ======================================== */
 .main {
+    pointer-events: auto;
     margin-left: auto;
     margin-right: auto;
     padding: 100px 80px 100px 160px;
@@ -490,6 +488,7 @@ ul, ol {
     transition: var(--transition-fast);
     position: relative;
     overflow: hidden;
+    cursor: pointer;
 }
 
 .project-card::before {
@@ -513,12 +512,11 @@ ul, ol {
 }
 
 .project-card__preview {
-    width: 100%;
+    width: calc(100% + 56px);
     aspect-ratio: 16 / 9;
     background: var(--bg-primary);
     border-bottom: 1px solid var(--border);
     margin: -28px -28px 20px -28px;
-    width: calc(100% + 56px);
     overflow: hidden;
     position: relative;
 }
@@ -617,8 +615,6 @@ ul, ol {
     width: 14px;
     height: 14px;
 }
-
-.project-card { cursor: pointer; }
 
 /* ========================================
    LEARNING PATH SECTION

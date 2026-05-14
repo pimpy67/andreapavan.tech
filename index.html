@@ -799,7 +799,7 @@
                         <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
                         <polyline points="22,6 12,13 2,6"/>
                     </svg>
-                    andreapavan67@gmail.com
+                    <span id="copyEmailText"></span>
                     <span class="contact-link__arrow" id="copyEmailArrow">copia →</span>
                 </button>
             </div>
@@ -826,7 +826,7 @@
     <div id="lightbox" class="lightbox" role="dialog" aria-modal="true">
         <button class="lightbox__close" id="lightboxClose" aria-label="Chiudi">&times;</button>
         <div class="lightbox__inner">
-            <img src="" alt="" id="lightboxImg" class="lightbox__img">
+            <img alt="" id="lightboxImg" class="lightbox__img">
             <p id="lightboxCaption" class="lightbox__caption"></p>
         </div>
     </div>
@@ -1186,7 +1186,7 @@
 
             function close() {
                 lb.classList.remove('open');
-                lbImg.src = '';
+                lbImg.removeAttribute('src');
                 document.removeEventListener('keydown', escHandler);
             }
 
@@ -1236,6 +1236,8 @@
 
         const copyBtn = document.getElementById('copyEmailBtn');
         if (copyBtn) {
+            const emailText = document.getElementById('copyEmailText');
+            if (emailText) emailText.textContent = copyBtn.dataset.email;
             copyBtn.addEventListener('click', () => {
                 navigator.clipboard.writeText(copyBtn.dataset.email).then(() => {
                     const arrow = document.getElementById('copyEmailArrow');
