@@ -21,6 +21,9 @@
     <meta name="twitter:description"     content="Web Developer - Il mio percorso formativo e i miei progetti">
     <meta name="twitter:image"           content="https://andreapavan.tech/img/above.png">
     
+    <!-- Theme: applicato subito per evitare flash -->
+    <script>(function(){var t=localStorage.getItem('ap-theme')||'dark';document.documentElement.setAttribute('data-theme',t);})();</script>
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -53,14 +56,14 @@
 
     <!-- Theme Switcher -->
     <div class="theme-switcher">
-        <button class="theme-btn active" data-theme="light" onclick="setTheme('light')">
+        <button class="theme-btn" data-theme="light" onclick="setTheme('light')">
             <svg class="theme-btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <circle cx="12" cy="12" r="5"/>
                 <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
             </svg>
             <span class="theme-btn__label">Light</span>
         </button>
-        <button class="theme-btn" data-theme="dark" onclick="setTheme('dark')">
+        <button class="theme-btn active" data-theme="dark" onclick="setTheme('dark')">
             <svg class="theme-btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
             </svg>

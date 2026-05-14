@@ -158,8 +158,7 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
   // Integrazione con portfolio.html (usa data-theme)
-  const savedTheme = localStorage.getItem('theme') || 'light';
-  dark = savedTheme === 'dark';
+  dark = document.documentElement.getAttribute('data-theme') !== 'light';
 
   // Osserva cambiamenti del tema
   const observer = new MutationObserver(() => {
