@@ -651,6 +651,7 @@ ul, ol {
 }
 
 .path__skill {
+    display: inline-block;
     font-family: var(--font-mono);
     font-size: 0.7rem;
     text-transform: uppercase;
@@ -660,6 +661,15 @@ ul, ol {
     padding: 5px 12px;
     border-radius: 2px;
     opacity: 0.85;
+    transition: background var(--transition-fast), color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast), opacity var(--transition-fast);
+}
+
+.path__skill:hover {
+    opacity: 1;
+    background: var(--accent);
+    color: var(--bg-primary);
+    box-shadow: 0 4px 16px var(--shadow-accent), 0 1px 4px rgba(0,0,0,0.08);
+    transform: translateY(-2px);
 }
 
 .path__timeline {
@@ -1329,7 +1339,7 @@ ul, ol {
 }
 
 .contact-link {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     gap: 16px;
     font-size: 1.5rem;
@@ -1337,14 +1347,16 @@ ul, ol {
     transition: var(--transition-fast);
     padding: 16px 8px;
     border-bottom: 1px solid var(--border);
+    border-left: 3px solid transparent;
     border-radius: 4px;
 }
 
 .contact-link:hover {
     color: var(--accent);
-    padding-left: 20px;
+    padding-left: 17px;
+    border-left-color: var(--accent);
     background: var(--bg-secondary);
-    box-shadow: 0 2px 12px var(--shadow-accent), 0 1px 3px rgba(0,0,0,0.06);
+    box-shadow: 0 4px 16px var(--shadow-accent), 0 1px 4px rgba(0,0,0,0.08);
 }
 
 .contact-link__icon {
