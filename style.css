@@ -1335,13 +1335,16 @@ ul, ol {
     font-size: 1.5rem;
     font-weight: 600;
     transition: var(--transition-fast);
-    padding: 16px 0;
+    padding: 16px 8px;
     border-bottom: 1px solid var(--border);
+    border-radius: 4px;
 }
 
 .contact-link:hover {
     color: var(--accent);
-    padding-left: 16px;
+    padding-left: 20px;
+    background: var(--bg-secondary);
+    box-shadow: 0 2px 12px var(--shadow-accent), 0 1px 3px rgba(0,0,0,0.06);
 }
 
 .contact-link__icon {
