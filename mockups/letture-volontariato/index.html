@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prototipo — Letture & Volontariato</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Reset & base ──────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #0a0a0a;
+      --card-bg:     #111111;
+      --card-border: #222222;
+      --text:        #e0e0e0;
+      --muted:       #888888;
+      --accent:      #b5f53b;
+      --overlay:     rgba(0, 0, 0, 0.72);
+      --radius-card: 14px;
+      --radius-book: 6px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      padding: 48px 24px 80px;
+      min-height: 100vh;
+    }
+
+    /* ── Page header ───────────────────────────────────────────── */
+    .page-header {
+      text-align: center;
+      margin-bottom: 56px;
+      opacity: 0;
+      animation: fadeUp 0.55s ease forwards;
+    }
+
+    .page-header__label {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .page-header__title {
+      font-size: clamp(18px, 3vw, 24px);
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+
+    .page-header__title span {
+      color: var(--accent);
+    }
+
+    /* ── Section labels ────────────────────────────────────────── */
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      opacity: 0;
+      animation: fadeUp 0.5s ease forwards;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--card-border);
+    }
+
+    /* ── Separator ─────────────────────────────────────────────── */
+    .separator {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 56px 0 48px;
+      opacity: 0;
+      animation: fadeUp 0.5s ease forwards;
+    }
+
+    .separator__line {
+      flex: 1;
+      height: 1px;
+      background: var(--card-border);
+    }
+
+    .separator__label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    /* ── Variant wrappers ──────────────────────────────────────── */
+    .variant { margin-bottom: 12px; }
+
+    /* Variante A — side by side */
+    .variant-a__row {
+      display: flex;
+      flex-direction: row;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .variant-a__row > .card {
+      flex: 1 1 0;
+      min-width: 0;
+    }
+
+    /* Variante B — stacked */
+    .variant-b__stack {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    /* ── Card base ─────────────────────────────────────────────── */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-card);
+      padding: 24px;
+      opacity: 0;
+      animation: fadeUp 0.55s ease forwards;
+    }
+
+    .card__header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 4px;
+    }
+
+    .card__icon {
+      font-size: 20px;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .card__title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #ffffff;
+      letter-spacing: -0.01em;
+    }
+
+    /* ── Card label (section tag) ──────────────────────────────── */
+    .card__tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .card__footer {
+      font-size: 14px;
+      color: var(--muted);
+      margin-top: 16px;
+      line-height: 1.55;
+    }
+
+    /* ── Bookshelf grid ────────────────────────────────────────── */
+    .bookshelf {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .book-item {
+      position: relative;
+      aspect-ratio: 2 / 3;
+      border-radius: var(--radius-book);
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .book-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: var(--radius-book);
+      display: block;
+      transition: transform 0.2s ease;
+      background-color: #1a1a1a;
+    }
+
+    .book-item:hover img {
+      transform: scale(1.04);
+    }
+
+    .book-item__overlay {
+      position: absolute;
+      inset: 0;
+      background: var(--overlay);
+      border-radius: var(--radius-book);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 8px;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .book-item:hover .book-item__overlay {
+      opacity: 1;
+    }
+
+    .book-item__overlay-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.3;
+      margin-bottom: 4px;
+    }
+
+    .book-item__overlay-author {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--accent);
+      line-height: 1.3;
+    }
+
+    /* ── Fallback cover (if image fails to load) ───────────────── */
+    .book-item__fallback {
+      position: absolute;
+      inset: 0;
+      background: #1e1e1e;
+      border-radius: var(--radius-book);
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 8px;
+      text-align: center;
+      gap: 6px;
+    }
+
+    .book-item__fallback.is-visible {
+      display: flex;
+    }
+
+    .book-item__fallback-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1.3;
+      word-break: break-word;
+    }
+
+    .book-item__fallback-author {
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--muted);
+      line-height: 1.3;
+    }
+
+    /* ── Timeline ──────────────────────────────────────────────── */
+    .timeline {
+      margin-top: 16px;
+      position: relative;
+      padding-left: 28px;
+    }
+
+    /* Vertical line */
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 12px;
+      top: 6px;
+      bottom: 6px;
+      width: 2px;
+      background: var(--accent);
+    }
+
+    .timeline__entry {
+      position: relative;
+      margin-bottom: 32px;
+    }
+
+    .timeline__entry:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Dot on the line */
+    .timeline__entry::before {
+      content: '';
+      position: absolute;
+      left: -22px;
+      top: 5px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid #ffffff;
+      box-shadow: 0 0 0 2px var(--bg);
+    }
+
+    .timeline__period {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+      margin-bottom: 2px;
+    }
+
+    .timeline__org {
+      font-size: 15px;
+      font-weight: 600;
+      color: #ffffff;
+      letter-spacing: -0.01em;
+    }
+
+    .timeline__desc {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 4px;
+      line-height: 1.55;
+    }
+
+    /* ── Animations ────────────────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Staggered delays */
+    .page-header             { animation-delay: 0s; }
+    .section-label.a         { animation-delay: 0.1s; }
+    .variant-a__row .card:first-child { animation-delay: 0.2s; }
+    .variant-a__row .card:last-child  { animation-delay: 0.3s; }
+    .separator               { animation-delay: 0.35s; }
+    .section-label.b         { animation-delay: 0.4s; }
+    .variant-b__stack .card:first-child { animation-delay: 0.5s; }
+    .variant-b__stack .card:last-child  { animation-delay: 0.6s; }
+
+    /* ── Responsive ────────────────────────────────────────────── */
+    @media (max-width: 720px) {
+      body { padding: 32px 16px 64px; }
+
+      .variant-a__row {
+        flex-direction: column;
+      }
+
+      .variant-a__row > .card {
+        flex: none;
+        width: 100%;
+      }
+
+      .bookshelf {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .bookshelf {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 6px;
+      }
+    }
+
+    /* ── Focus states ──────────────────────────────────────────── */
+    .book-item:focus {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .book-item:focus .book-item__overlay {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Page header ──────────────────────────────────────────── -->
+  <header class="page-header">
+    <div class="page-header__label">Prototipo di layout</div>
+    <h1 class="page-header__title">Letture <span>&</span> Volontariato</h1>
+  </header>
+
+  <!-- ════════════════════════════════════════════════════════════
+       VARIANTE A — AFFIANCATE
+  ════════════════════════════════════════════════════════════ -->
+  <section class="variant variant-a" aria-label="Variante A – Affiancate">
+    <div class="section-label a">Variante A — Affiancate</div>
+
+    <div class="variant-a__row">
+
+      <!-- Card Letture -->
+      <article class="card card--letture">
+        <div class="card__tag">Passioni</div>
+        <div class="card__header">
+          <span class="card__icon" aria-hidden="true">📚</span>
+          <h2 class="card__title">Letture</h2>
+        </div>
+
+        <div class="bookshelf" role="list" aria-label="Libreria">
+
+          <div class="book-item" role="listitem" tabindex="0" aria-label="I Fiori del Male — Baudelaire">
+            <div class="book-item__fallback">
+              <div class="book-item__fallback-title">I Fiori del Male</div>
+              <div class="book-item__fallback-author">Baudelaire</div>
+            </div>
+            <img src="https://covers.openlibrary.org/b/id/8739161-M.jpg"
+                 alt="I Fiori del Male — Baudelaire"
+                 onerror="this.style.display='none';this.previousElementSibling.classList.add('is-visible')" />
+            <div class="book-item__overlay">
+              <div class="book-item__overlay-title">I Fiori del Male</div>
+              <div class="book-item__overlay-author">Baudelaire</div>
+            </div>
+          </div>
+
+          <div class="book-item" role="listitem" tabindex="0" aria-label="L'Opera da tre soldi — Brecht">
+            <div class="book-item__fallback">
+              <div class="book-item__fallback-title">L'Opera da tre soldi</div>
+              <div class="book-item__fallback-author">Brecht</div>
+            </div>
+            <img src="https://covers.openlibrary.org/b/id/8226138-M.jpg"
+                 alt="L'Opera da tre soldi — Brecht"
+                 onerror="this.style.display='none';this.previousElementSibling.classList.add('is-visible')" />
+            <div class="book-item__overlay">
+              <div class="book-item__overlay-title">L'Opera da tre soldi</div>
+              <div class="book-item__overlay-author">Brecht</div>
+            </div>
+          </div>
+
+          <div class="book-item" role="listitem" tabindex="0" aria-label="L'insostenibile leggerezza dell'essere — Kundera">
+            <div class="book-item__fallback">
+              <div class="book-item__fallback-title">L'insostenibile leggerezza dell'essere</div>
+              <div class="book-item__fallback-author">Kundera</div>
+            </div>
+            <img src="https://covers.openlibrary.org/b/id/8758947-M.jpg"
+                 alt="L'insostenibile leggerezza dell'essere — Kundera"
+                 onerror="this.style.display='none';this.previousElementSibling.classList.add('is-visible')" />
+            <div class="book-item__overlay">
+              <div class="book-item__overlay-title">L'insostenibile leggerezza dell'essere</div>
+              <div class="book-item__overlay-author">Kundera</div>
+            </div>
+          </div>
+
+          <div class="book-item" role="listitem" tabindex="0" aria-label="Cent'anni di solitudine — García Márquez">
+            <div class="book-item__fallback">
+              <div class="book-item__fallback-title">Cent'anni di solitudine</div>
+              <div class="book-item__fallback-author">García Márquez</div>
+            </div>
+            <img src="https://covers.openlibrary.org/b/id/8226234-M.jpg"
+                 alt="Cent'anni di solitudine — García Márquez"
+                 onerror="this.style.display='none';this.previousElementSibling.classList.add('is-visible')" />
+            <div class="book-item__overlay">
+              <div class="book-item__overlay-title">Cent'anni di solitudine</div>
+              <div class="book-item__overlay-author">García Márquez</div>
+            </div>
+          </div>
+
+          <div class="book-item" role="listitem" tabindex="0" aria-label="Uomini e topi — Steinbeck">
+            <div class="book-item__fallback">
+              <div class="book-item__fallback-title">Uomini e topi</div>
+              <div class="book-item__fallback-author">Steinbeck</div>
+            </div>
+            <img src="https://covers.openlibrary.org/b/id/8233433-M.jpg"
+                 alt="Uomini e topi — Steinbeck"
+                 onerror="this.style.display='none';this.previousElementSibling.classList.add('is-visible')" />
+            <div class="book-item__overlay">
+              <div class="book-item__overlay-title">Uomini e topi</div>
+              <div class="book-item__overlay-author">Steinbeck</div>
+            </div>
+          </div>
+
+          <div class="book-item" role="listitem" tabindex="0" aria-label="Novecento — Baricco">
+            <div class="book-item__fallback">
+              <div class="book-item__fallback-title">Novecento</div>
+              <div class="book-item__fallback-author">Baricco</div>
+            </div>
+            <img src="https://covers.openlibrary.org/b/id/10519389-M.jpg"
+                 alt="Novecento — Baricco"
+                 onerror="this.style.display='none';this.previousElementSibling.classList.add('is-visible')" />
+            <div class="book-item__overlay">
+              <div class="book-item__overlay-title">Novecento</div>
+              <div class="book-item__overlay-author">Baricco</div>
+            </div>
+          </div>
+
+        </div><!-- /bookshelf -->
+
+        <p class="card__footer">Poesia, narrativa, teatro. Letture che hanno lasciato il segno.</p>
+      </article>
+
+      <!-- Card Volontariato -->
+      <article class="card card--volontariato">
+        <div class="card__tag">Impegno</div>
+        <div class="card__header">
+          <span class="card__icon" aria-hidden="true">🤝</span>
+          <h2 class="card__title">Volontariato</h2>
+        </div>
+
+        <div class="timeline" role="list" aria-label="Esperienze di volontariato">
+
+          <div class="timeline__entry" role="listitem">
+            <div class="timeline__period">2022 – oggi</div>
+            <div class="timeline__org">Croce Rossa Italiana</div>
+            <p class="timeline__desc">Volontario attivo in attività di supporto alla comunità locale e gestione emergenze.</p>
+          </div>
+
+          <div class="timeline__entry" role="listitem">
+            <div class="timeline__period">2021</div>
+            <div class="timeline__org">Oratorio Don Bosco</div>
+            <p class="timeline__desc">Animatore per ragazzi delle scuole medie durante i camp estivi.</p>
+          </div>
+
+          <div class="timeline__entry" role="listitem">
+            <div class="timeline__period">2020</div>
+            <div class="timeline__org">Banco Alimentare</div>
+            <p class="timeline__desc">Raccolta e distribuzione di generi alimentari durante il periodo Covid.</p>
+          </div>
+
+        </div><!-- /timeline -->
+
+        <p class="card__footer">Restituire alla comunità è importante.</p>
+      </article>
+
+    </div><!-- /variant-a__row -->
+  </section>
+
+  <!-- ── Separator ─────────────────────────────────────────────── -->
+  <div class="separator" role="separator" aria-hidden="true">
+    <div class="separator__line"></div>
+    <span class="separator__label">Layout alternativo</span>
+    <div class="separator__line"></div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════════════
+       VARIANTE B — TIMELINE SOTTO
+  ════════════════════════════════════════════════════════════ -->
+  <section class="variant variant-b" aria-label="Variante B – Timeline sotto">
+    <div class="section-label b">Variante B — Timeline sotto</div>
+
+    <div class="variant-b__stack">
+
+      <!-- Card Letture (full-width) -->
+      <article class="card card--letture">
+        <div class="card__tag">Passioni</div>
+        <div class="card__header">
+          <span class="card__icon" aria-hidden="true">📚</span>
+          <h2 class="card__title">Letture</h2>
+        </div>
+
+        <div class="bookshelf" role="list" aria-label="Libreria">
+
+          <div class="book-item" role="listitem" tabindex="0" aria-label="I Fiori del Male — Baudelaire">
+            <div class="book-item__fallback">
+              <div class="book-item__fallback-title">I Fiori del Male</div>
+              <div class="book-item__fallback-author">Baudelaire</div>
+            </div>
+            <img src="https://covers.openlibrary.org/b/id/8739161-M.jpg"
+                 alt="I Fiori del Male — Baudelaire"
+                 loading="lazy"
+                 onerror="this.style.display='none';this.previousElementSibling.classList.add('is-visible')" />
+            <div class="book-item__overlay">
+              <div class="book-item__overlay-title">I Fiori del Male</div>
+              <div class="book-item__overlay-author">Baudelaire</div>
+            </div>
+          </div>
+
+          <div class="book-item" role="listitem" tabindex="0" aria-label="L'Opera da tre soldi — Brecht">
+            <div class="book-item__fallback">
+              <div class="book-item__fallback-title">L'Opera da tre soldi</div>
+              <div class="book-item__fallback-author">Brecht</div>
+            </div>
+            <img src="https://covers.openlibrary.org/b/id/8226138-M.jpg"
+                 alt="L'Opera da tre soldi — Brecht"
+                 loading="lazy"
+                 onerror="this.style.display='none';this.previousElementSibling.classList.add('is-visible')" />
+            <div class="book-item__overlay">
+              <div class="book-item__overlay-title">L'Opera da tre soldi</div>
+              <div class="book-item__overlay-author">Brecht</div>
+            </div>
+          </div>
+
+          <div class="book-item" role="listitem" tabindex="0" aria-label="L'insostenibile leggerezza dell'essere — Kundera">
+            <div class="book-item__fallback">
+              <div class="book-item__fallback-title">L'insostenibile leggerezza dell'essere</div>
+              <div class="book-item__fallback-author">Kundera</div>
+            </div>
+            <img src="https://covers.openlibrary.org/b/id/8758947-M.jpg"
+                 alt="L'insostenibile leggerezza dell'essere — Kundera"
+                 loading="lazy"
+                 onerror="this.style.display='none';this.previousElementSibling.classList.add('is-visible')" />
+            <div class="book-item__overlay">
+              <div class="book-item__overlay-title">L'insostenibile leggerezza dell'essere</div>
+              <div class="book-item__overlay-author">Kundera</div>
+            </div>
+          </div>
+
+          <div class="book-item" role="listitem" tabindex="0" aria-label="Cent'anni di solitudine — García Márquez">
+            <div class="book-item__fallback">
+              <div class="book-item__fallback-title">Cent'anni di solitudine</div>
+              <div class="book-item__fallback-author">García Márquez</div>
+            </div>
+            <img src="https://covers.openlibrary.org/b/id/8226234-M.jpg"
+                 alt="Cent'anni di solitudine — García Márquez"
+                 loading="lazy"
+                 onerror="this.style.display='none';this.previousElementSibling.classList.add('is-visible')" />
+            <div class="book-item__overlay">
+              <div class="book-item__overlay-title">Cent'anni di solitudine</div>
+              <div class="book-item__overlay-author">García Márquez</div>
+            </div>
+          </div>
+
+          <div class="book-item" role="listitem" tabindex="0" aria-label="Uomini e topi — Steinbeck">
+            <div class="book-item__fallback">
+              <div class="book-item__fallback-title">Uomini e topi</div>
+              <div class="book-item__fallback-author">Steinbeck</div>
+            </div>
+            <img src="https://covers.openlibrary.org/b/id/8233433-M.jpg"
+                 alt="Uomini e topi — Steinbeck"
+                 loading="lazy"
+                 onerror="this.style.display='none';this.previousElementSibling.classList.add('is-visible')" />
+            <div class="book-item__overlay">
+              <div class="book-item__overlay-title">Uomini e topi</div>
+              <div class="book-item__overlay-author">Steinbeck</div>
+            </div>
+          </div>
+
+          <div class="book-item" role="listitem" tabindex="0" aria-label="Novecento — Baricco">
+            <div class="book-item__fallback">
+              <div class="book-item__fallback-title">Novecento</div>
+              <div class="book-item__fallback-author">Baricco</div>
+            </div>
+            <img src="https://covers.openlibrary.org/b/id/10519389-M.jpg"
+                 alt="Novecento — Baricco"
+                 loading="lazy"
+                 onerror="this.style.display='none';this.previousElementSibling.classList.add('is-visible')" />
+            <div class="book-item__overlay">
+              <div class="book-item__overlay-title">Novecento</div>
+              <div class="book-item__overlay-author">Baricco</div>
+            </div>
+          </div>
+
+        </div><!-- /bookshelf -->
+
+        <p class="card__footer">Poesia, narrativa, teatro. Letture che hanno lasciato il segno.</p>
+      </article>
+
+      <!-- Card Volontariato (full-width, below) -->
+      <article class="card card--volontariato">
+        <div class="card__tag">Impegno</div>
+        <div class="card__header">
+          <span class="card__icon" aria-hidden="true">🤝</span>
+          <h2 class="card__title">Volontariato</h2>
+        </div>
+
+        <div class="timeline" role="list" aria-label="Esperienze di volontariato">
+
+          <div class="timeline__entry" role="listitem">
+            <div class="timeline__period">2022 – oggi</div>
+            <div class="timeline__org">Croce Rossa Italiana</div>
+            <p class="timeline__desc">Volontario attivo in attività di supporto alla comunità locale e gestione emergenze.</p>
+          </div>
+
+          <div class="timeline__entry" role="listitem">
+            <div class="timeline__period">2021</div>
+            <div class="timeline__org">Oratorio Don Bosco</div>
+            <p class="timeline__desc">Animatore per ragazzi delle scuole medie durante i camp estivi.</p>
+          </div>
+
+          <div class="timeline__entry" role="listitem">
+            <div class="timeline__period">2020</div>
+            <div class="timeline__org">Banco Alimentare</div>
+            <p class="timeline__desc">Raccolta e distribuzione di generi alimentari durante il periodo Covid.</p>
+          </div>
+
+        </div><!-- /timeline -->
+
+        <p class="card__footer">Restituire alla comunità è importante.</p>
+      </article>
+
+    </div><!-- /variant-b__stack -->
+  </section>
+
+</body>
+</html>
